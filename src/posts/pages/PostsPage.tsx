@@ -4,6 +4,8 @@ export const PostsPage = () => {
   return (
     <section>
       <CardPost/>
+      <CardPost/>
+      <CardPost/>
     </section>
   )
 }
