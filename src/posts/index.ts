@@ -1,2 +1,2 @@
 export * from './pages/PostsPage'
-export * from './router/router'
+export * from './router/post.router'

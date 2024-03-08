@@ -2,7 +2,7 @@ import { createBrowserRouter } from 'react-router-dom'
 
 import { authRouter } from '../auth'
 import { postsRouter } from '../posts'
-import { Layout } from '../posts/layout/Layout'
+// import { Layout } from '../posts/layout/Layout'
 
 export const router = createBrowserRouter([
   {
@@ -10,7 +10,6 @@ export const router = createBrowserRouter([
     children: authRouter
   },
   {
-    element: <Layout/>,
     path: '/',
     children: postsRouter
   }
