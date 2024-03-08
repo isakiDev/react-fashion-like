@@ -3,23 +3,24 @@ import { Link } from 'react-router-dom'
 import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 
+import { toast } from 'sonner'
+
 import { ErrorMessageFormik, InputFormik } from '../../ui/components'
-
-interface IForm {
-  email: string
-  password: string
-}
-
-const INITIAL_VALUES: IForm = {
-  email: '',
-  password: ''
-}
-
-const handleSubmit = () => {
-  console.log('submit')
-}
+import { LOGIN_INITIAL_VALUES } from '../../consts'
+import { useAuth } from '..'
+import { type LoginRequest } from '../../types'
 
 export const LoginPage = () => {
+  const { onLoginUser } = useAuth()
+
+  const handleSubmit = (values: LoginRequest) => {
+    toast.promise(onLoginUser(values), {
+      loading: 'Loading...',
+      success: () => 'Welcome',
+      error: () => 'Error'
+    })
+  }
+
   return (
 
     <main className="md:flex items-center justify-center h-screen max-w-[1000px] m-auto">
@@ -32,7 +33,7 @@ export const LoginPage = () => {
 
         <div className='flex flex-col gap-4 mx-4'>
           <Formik
-            initialValues={INITIAL_VALUES}
+            initialValues={LOGIN_INITIAL_VALUES}
             onSubmit={handleSubmit}
             validationSchema={Yup.object({
               email: Yup.string().email().required(),
