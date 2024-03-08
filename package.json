@@ -1,5 +1,5 @@
 {
-  "name": "react-fashion_like",
+  "name": "react-fashion-like",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -12,6 +12,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "6.22.1",
+    "sonner": "1.4.3",
     "yup": "1.3.3",
     "zustand": "4.5.2"
   },
