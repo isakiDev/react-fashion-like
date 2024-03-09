@@ -13,11 +13,12 @@ import { type LoginRequest } from '../../types'
 export const LoginPage = () => {
   const { onLoginUser } = useAuth()
 
-  const handleSubmit = (values: LoginRequest) => {
+  // TODO: maintain form values
+  const handleSubmit = async (values: LoginRequest) => {
     toast.promise(onLoginUser(values), {
       loading: 'Loading...',
       success: () => 'Welcome',
-      error: () => 'Error'
+      error: (error) => error.message
     })
   }
 
