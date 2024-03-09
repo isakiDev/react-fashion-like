@@ -13,6 +13,8 @@
 export interface User {
   id: string
   name: string
+  email: string
+  image: string
 }
 
 // Login
@@ -22,19 +24,14 @@ export interface LoginRequest {
 }
 
 export interface LoginResponse {
-  id: string
-  name: string
-  email: string
-  emailVerified: boolean
-  isActive: boolean
+  user: User
   token: string
 }
 
 // error
-// TODO: implement error
 export interface ErrorResponse {
-  message: string
-  error: string | string[]
+  message: string | string[]
+  error: string
   statusCode: number
 }
 
@@ -42,4 +39,35 @@ export interface ErrorResponse {
 export interface CheckAuthResponse {
   user: User
   token: string
+}
+
+// posts
+export interface PostsResponse {
+  id: number
+  title: string
+  description: string
+  image: string
+  createdAt: string
+  updatedAt: string
+  user: User
+  comments: Comment[]
+  likes: Like[]
+}
+
+export interface Comment {
+  id: number
+  comment: string
+  user: User
+}
+
+export interface Like {
+  id: number
+  user: User
+}
+
+// commment
+export interface CommentResponse {
+  id: number
+  comment: string
+  user: User
 }
