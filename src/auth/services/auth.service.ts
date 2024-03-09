@@ -1,17 +1,18 @@
-import { type CheckAuthResponse, type LoginRequest, type LoginResponse } from '../../types'
+import type { ErrorResponse, CheckAuthResponse, LoginRequest, LoginResponse } from '../../types'
 
 const API_URL = import.meta.env.VITE_API_URL
 
 export const login = async (values: LoginRequest): Promise<LoginResponse> => {
   const resp = await fetch(`${API_URL}/auth/login`, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(values)
   })
 
-  if (!resp.ok) throw new Error('Error in Login')
+  if (!resp.ok) {
+    const data = await resp.json() as ErrorResponse
+    handleErrorExepcion(data)
+  }
 
   const data = await resp.json() as LoginResponse
 
@@ -26,9 +27,22 @@ export const checkAuthStatus = async (token: string): Promise<CheckAuthResponse>
     }
   })
 
-  if (!resp.ok) throw new Error('Error in check token')
+  if (!resp.ok) {
+    const data = await resp.json() as ErrorResponse
+    handleErrorExepcion(data)
+  }
 
   const data = await resp.json() as CheckAuthResponse
 
   return data
+}
+
+const handleErrorExepcion = (error: ErrorResponse) => {
+  const errorMessages = error.message ?? 'Error in fetch'
+
+  const errors = Array.isArray(errorMessages)
+    ? errorMessages.map(error => error).join('')
+    : errorMessages
+
+  throw new Error(errors)
 }
