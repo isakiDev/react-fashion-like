@@ -1,23 +1,26 @@
-import { CardPost } from '../components'
+import { useEffect } from 'react'
+import { CardPost, SkeletonPost } from '../components'
+import { usePosts } from '..'
 
 export const PostsPage = () => {
-  return (
-    <section>
-      {/* {
-        post.map(({ post, user }) => (
-          <CardPost
-            key={post.id}
-            userImage='https://fer-uig.glitch.me/?uuid=1%22%20alt=%22user-icon'
-            postImage={post.image ?? 'dadwa'}
-            username={user.name}/>
-        ))
-      } */}
+  const { posts, onGetPosts } = usePosts()
 
-      <CardPost
-        key={1}
-        userImage='https://fer-uig.glitch.me/?uuid=1%22%20alt=%22user-icon'
-        postImage={'dawda'}
-        username={'Gabriel'} />
+  useEffect(() => {
+    onGetPosts()
+  }, [])
+
+  return (
+    <section className='p-4 w-full max-w-[500px] space-y-2'>
+      {
+        (!posts)
+          ? (< SkeletonPost />)
+          : posts.map((post) => (
+            <CardPost
+              key={post.id}
+              post={post}
+            />
+          ))
+      }
     </section>
   )
 }
