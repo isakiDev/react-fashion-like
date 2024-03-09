@@ -1,21 +1,20 @@
+import { useEffect } from 'react'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 
 import { Toaster } from 'sonner'
+
 import { router } from './router/router'
-
-import { AUTH_STATUS } from './consts'
-
 import { postsRouter } from './posts'
+import { AUTH_STATUS } from './consts'
 import { useAuth } from './auth'
-import { useEffect } from 'react'
 import { Spinner } from './ui/components'
 // import { authRouter } from './auth'
 
 export const App = () => {
-  const { userStatus, checkAuthToken } = useAuth()
+  const { userStatus, onCheckAuthToken } = useAuth()
 
   useEffect(() => {
-    checkAuthToken()
+    onCheckAuthToken()
   }, [])
 
   if (userStatus === AUTH_STATUS.CHECKING) {
@@ -24,7 +23,7 @@ export const App = () => {
 
   const checkRouter = userStatus === AUTH_STATUS.AUTHENTICATED
     ? createBrowserRouter(postsRouter)
-    : router
+    : createBrowserRouter(router)
 
   return (
     <>

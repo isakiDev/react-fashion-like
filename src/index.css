@@ -5,3 +5,12 @@
 :root {
   background-color: whitesmoke;
 }
+/* 
+input {
+  box-shadow: 0 0 0 2px #262e3a;
+} */
+
+/* 
+input:focus {
+  box-shadow: 0 0 0 2px #8a4af3;
+} */
