@@ -7,41 +7,47 @@ export const useAuth = () => {
   const onChecking = useBoundStore(state => state.onChecking)
   const onLogin = useBoundStore(state => state.onLogin)
   const onLogout = useBoundStore(state => state.onLogout)
-  // const onLogout = useBoundStore(state => state.onLogout)
+  const user = useBoundStore(state => state.user)
 
   const onLoginUser = async (data: LoginRequest): Promise<void> => {
     onChecking()
 
     try {
-      const { token, ...user } = await login(data)
+      const { token, user } = await login(data)
 
       window.localStorage.setItem('TOKEN', token)
-      onLogin({ id: user.id, name: user.name })
+      onLogin(user)
     } catch (error) {
       onLogout(null)
+      throw error
     }
   }
 
-  const checkAuthToken = async () => {
-    const token = window.localStorage.getItem('TOKEN') ?? ''
+  const onLogoutUser = () => {
+    window.localStorage.removeItem('TOKEN')
+    onLogout(null)
+  }
+
+  const onCheckAuthToken = async () => {
+    const token = window.localStorage.getItem('TOKEN')
+    if (!token) return onLogout(null)
 
     try {
-      if (!token) return onLogout(null)
-
       const data = await checkAuthStatus(token)
-      const { id, name } = data.user
 
       window.localStorage.setItem('TOKEN', data.token)
-      onLogin({ id, name })
+      onLogin(data.user)
     } catch (error) {
       onLogout(null)
     }
   }
 
   return {
+    user,
     userStatus,
 
     onLoginUser,
-    checkAuthToken
+    onLogoutUser,
+    onCheckAuthToken
   }
 }
