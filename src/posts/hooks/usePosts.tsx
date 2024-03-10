@@ -30,7 +30,6 @@ export const usePosts = () => {
 
       addComment(commentedUser, postId, id, newComment)
     } catch (error) {
-      onLogout(null)
       throw error
     }
   }
@@ -45,7 +44,6 @@ export const usePosts = () => {
       const { id } = await toggleLikePost(postId, token) as { id: number | undefined }
       toggleLike(user, postId, id)
     } catch (error) {
-      onLogout(null)
       throw error
     }
   }

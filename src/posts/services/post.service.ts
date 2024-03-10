@@ -38,6 +38,7 @@ export const addCommentPost = async (postId: number, comment: string, token: str
   return data
 }
 
+// likes
 export const toggleLikePost = async (postId: number, token: string) => {
   const resp = await fetch(`${API_URL}/like/${postId}`, {
     method: 'POST',
