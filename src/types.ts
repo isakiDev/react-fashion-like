@@ -28,6 +28,18 @@ export interface LoginResponse {
   token: string
 }
 
+// Register
+export interface RegisterRequest {
+  name: string
+  email: string
+  password: string
+}
+
+export interface RegisterResponse {
+  user: User
+  token: string
+}
+
 // error
 export interface ErrorResponse {
   message: string | string[]

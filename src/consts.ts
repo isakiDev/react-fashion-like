@@ -1,5 +1,5 @@
 import { HomeIcon, LogoutIcon, SettingsIcon } from './ui/components'
-import { type LoginRequest } from './types'
+// import { type LoginRequest } from './types'
 
 export enum AUTH_STATUS {
   CHECKING = 'checking',
@@ -7,13 +7,20 @@ export enum AUTH_STATUS {
   AUTHENTICATED = 'authenticated'
 }
 
-export const LOGIN_INITIAL_VALUES: LoginRequest = {
+export const LOGIN_INITIAL_VALUES = {
   email: '',
   password: ''
 }
 
+export const REGISTER_INITIAL_VALUES = {
+  name: '',
+  email: '',
+  password: '',
+  confirmPassword: ''
+}
+
 export const SIDEBAR_LINKS = [
-  { to: '/', icon: HomeIcon },
-  { to: '/settings', icon: SettingsIcon },
-  { to: '/auth/login', icon: LogoutIcon }
+  { href: '/', icon: HomeIcon },
+  { href: '/settings', icon: SettingsIcon },
+  { href: '/auth/login', icon: LogoutIcon }
 ]
