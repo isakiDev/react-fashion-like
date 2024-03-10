@@ -6,7 +6,7 @@ export const SettingsPage = () => {
   return (
     <section className='flex flex-col gap-8 p-4 bg-white dark:text-white dark:bg-gray-900 w-full max-w-[500px]'>
       <div className='flex gap-8'>
-        <img className='w-20 h-20 rounded-md' src={user?.image} alt="User Image" />
+        <img className='object-cover w-20 h-20 rounded-md' src={user?.image} alt="User Image" />
         <div className='space-y-2'>
           <button className='px-2 py-1 font-semibold bg-gray-700 hover:bg-gray-600 rounded-md'>Change Image</button>
           <p className='text-sm text-gray-400'>JPG, GIF or PNG. 1MB max.</p>
