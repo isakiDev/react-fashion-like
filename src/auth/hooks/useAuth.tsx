@@ -1,6 +1,6 @@
-import { login, checkAuthStatus } from '..'
 import { useBoundStore } from '../../store/bound.store'
-import { type LoginRequest } from '../../types'
+import { login, checkAuthStatus, register } from '..'
+import type { RegisterRequest, LoginRequest } from '../../types'
 
 export const useAuth = () => {
   const userStatus = useBoundStore(state => state.status)
@@ -17,6 +17,22 @@ export const useAuth = () => {
 
       window.localStorage.setItem('TOKEN', token)
       onLogin(user)
+    } catch (error) {
+      onLogout(null)
+      throw error
+    }
+  }
+
+  const onRegisterUser = async (data: RegisterRequest) => {
+    onChecking()
+
+    try {
+      const { token, user } = await register(data)
+
+      window.localStorage.setItem('TOKEN', token)
+
+      onLogout(null)
+      // onLogin(user)
     } catch (error) {
       onLogout(null)
       throw error
@@ -46,8 +62,9 @@ export const useAuth = () => {
     user,
     userStatus,
 
+    onCheckAuthToken,
     onLoginUser,
     onLogoutUser,
-    onCheckAuthToken
+    onRegisterUser
   }
 }

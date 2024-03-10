@@ -1,25 +1,31 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
+import { toast } from 'sonner'
 import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 
+import { useAuth } from '..'
 import { ErrorMessageFormik, InputFormik } from '../../ui/components'
+import { REGISTER_INITIAL_VALUES } from '../../consts'
 
-interface IForm {
+interface RegisterInputs {
   name: string
   email: string
   password: string
-  confirm_password: string
-}
-
-const INITIAL_VALUES: IForm = {
-  name: '',
-  email: '',
-  password: '',
-  confirm_password: ''
+  confirmPassword: string
 }
 
 export const RegisterPage = () => {
+  const { onRegisterUser } = useAuth()
+  const navigate = useNavigate()
+
+  const handleSubmitRegisterUser = async ({ confirmPassword, ...data }: RegisterInputs) => {
+    // TODO: fix navigate
+    onRegisterUser(data)
+      .then(() => { navigate('/auth/login') })
+      .catch(error => toast.error(error.message))
+  }
+
   return (
 
     <main className="md:flex items-center justify-center h-screen max-w-[1000px] m-auto">
@@ -32,13 +38,13 @@ export const RegisterPage = () => {
 
         <div className='flex flex-col gap-4 mx-4'>
           <Formik
-            initialValues={INITIAL_VALUES}
-            onSubmit={(val) => { console.log(val) }}
+            initialValues={REGISTER_INITIAL_VALUES}
+            onSubmit={handleSubmitRegisterUser}
             validationSchema={Yup.object({
               name: Yup.string().required(),
               email: Yup.string().email().required(),
-              password: Yup.string().required(),
-              confirm_password: Yup.string().oneOf([Yup.ref('password')], 'Password must match').required('Required')
+              password: Yup.string().min(5).required(),
+              confirmPassword: Yup.string().oneOf([Yup.ref('password')], 'Password must match').required('Confirm password is required')
             })}
           >
             {
@@ -55,8 +61,8 @@ export const RegisterPage = () => {
                     <InputFormik name='password' type='password' placeholder='Enter password' />
                     <ErrorMessageFormik component='span' name='password' />
 
-                    <InputFormik name='confirm_password' type='password' placeholder='Enter password' />
-                    <ErrorMessageFormik component='span' name='confirm_password' />
+                    <InputFormik name='confirmPassword' type='password' placeholder='Enter password' />
+                    <ErrorMessageFormik component='span' name='confirmPassword' />
                   </div>
 
                   <button

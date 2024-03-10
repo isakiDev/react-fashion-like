@@ -1,4 +1,4 @@
-import type { ErrorResponse, CheckAuthResponse, LoginRequest, LoginResponse } from '../../types'
+import type { ErrorResponse, CheckAuthResponse, LoginRequest, LoginResponse, RegisterRequest, RegisterResponse } from '../../types'
 
 const API_URL = import.meta.env.VITE_API_URL
 
@@ -15,6 +15,23 @@ export const login = async (values: LoginRequest): Promise<LoginResponse> => {
   }
 
   const data = await resp.json() as LoginResponse
+
+  return data
+}
+
+export const register = async (values: RegisterRequest): Promise<RegisterResponse> => {
+  const resp = await fetch(`${API_URL}/auth/register`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(values)
+  })
+
+  if (!resp.ok) {
+    const data = await resp.json() as ErrorResponse
+    handleErrorExepcion(data)
+  }
+
+  const data = await resp.json() as RegisterResponse
 
   return data
 }
