@@ -8,14 +8,18 @@ import { toast } from 'sonner'
 import { ErrorMessageFormik, InputFormik } from '../../ui/components'
 import { LOGIN_INITIAL_VALUES } from '../../consts'
 import { useAuth } from '..'
-import { type LoginRequest } from '../../types'
+
+interface LoginInputs {
+  email: string
+  password: string
+}
 
 export const LoginPage = () => {
   const { onLoginUser } = useAuth()
 
   // TODO: maintain form values
-  const handleSubmit = async (values: LoginRequest) => {
-    toast.promise(onLoginUser(values), {
+  const handleSubmit = async (data: LoginInputs) => {
+    toast.promise(onLoginUser(data), {
       loading: 'Loading...',
       success: () => 'Welcome',
       error: (error) => error.message
