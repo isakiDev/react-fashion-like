@@ -1,5 +1,5 @@
 import { useBoundStore } from '../../store/bound.store'
-import { login, checkAuthStatus, register } from '..'
+import { login, checkAuthStatus, register, verifyUserEmail } from '..'
 import type { RegisterRequest, LoginRequest } from '../../types'
 
 export const useAuth = () => {
@@ -58,6 +58,10 @@ export const useAuth = () => {
     }
   }
 
+  const onVerifyUserEmail = async (token: string) => {
+    return await verifyUserEmail(token)
+  }
+
   return {
     user,
     userStatus,
@@ -65,6 +69,7 @@ export const useAuth = () => {
     onCheckAuthToken,
     onLoginUser,
     onLogoutUser,
-    onRegisterUser
+    onRegisterUser,
+    onVerifyUserEmail
   }
 }

@@ -54,6 +54,22 @@ export const checkAuthStatus = async (token: string): Promise<CheckAuthResponse>
   return data
 }
 
+export const verifyUserEmail = async (token: string) => {
+  const resp = await fetch(`${API_URL}/auth/confirm?token=${token}`, {
+    headers: {
+      'Content-Type': 'application/json'
+      // Authorization: `Bearer ${token}`,
+    }
+  })
+
+  if (!resp.ok) {
+    const data = await resp.json() as ErrorResponse
+    handleErrorExepcion(data)
+  }
+
+  return true
+}
+
 const handleErrorExepcion = (error: ErrorResponse) => {
   const errorMessages = error.message ?? 'Error in fetch'
 
