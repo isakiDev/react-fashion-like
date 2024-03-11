@@ -1,6 +1,6 @@
 import { type RouteObject, Navigate } from 'react-router-dom'
 
-import { LoginPage, RegisterPage } from '..'
+import { ConfirmUserPage, LoginPage, RegisterPage } from '..'
 
 export const authRouter: RouteObject[] = [
   {
@@ -10,6 +10,10 @@ export const authRouter: RouteObject[] = [
   {
     path: 'register',
     element: <RegisterPage/>
+  },
+  {
+    path: 'confirm',
+    element: <ConfirmUserPage/>
   },
   {
     path: '*',
