@@ -1,7 +1,14 @@
+import { Formik } from 'formik'
 import { useAuth } from '../../auth'
+import { SETTINGS_INITIAL_VALUES } from '../../consts'
+import { ErrorMessageFormik, InputFormik } from '../../ui/components'
 
 export const SettingsPage = () => {
   const { user } = useAuth()
+
+  const handleSubmit = () => {
+
+  }
 
   return (
     <section className='flex flex-col gap-8 p-4 bg-white dark:text-white dark:bg-gray-900 w-full max-w-[500px]'>
@@ -16,25 +23,23 @@ export const SettingsPage = () => {
       <div>
         <h1 className='pb-3 font-semibold'>Personal Information</h1>
 
-        <form>
-          <div className='flex flex-col gap-4'>
-            <input
-              className='px-2 py-1 rounded-md bg-[#1d2432] border border-[#262e3a]'
-              type="text"
-              placeholder="Enter name"
-              value={user?.name}
-              onChange={() => {}}
-            />
-            <input
-              className='px-2 py-1 rounded-md bg-[#1d2432] border border-[#262e3a]'
-              type="email"
-              placeholder="Enter email"
-              value={user?.email}
-              onChange={() => {}}
-            />
-          </div>
-          <button className='px-4 py-1 my-8 rounded-md bg-slate-600'>Save</button>
-        </form>
+        <Formik
+          initialValues={SETTINGS_INITIAL_VALUES}
+          onSubmit={handleSubmit}
+        >
+          {
+            ({ handleChange }) => (
+              <form>
+                <div className='flex flex-col gap-4'>
+                  <InputFormik name='name' placeholder='Enter name' type='text' className='px-2 py-1 rounded-md bg-[#1d2432] border border-[#262e3a]' value={user?.name}/>
+                  <ErrorMessageFormik component='span' name='name'/>
+
+                </div>
+                <button className='px-4 py-1 my-8 rounded-md bg-slate-600'>Save</button>
+              </form>
+            )
+          }
+        </Formik>
       </div>
 
       <div>

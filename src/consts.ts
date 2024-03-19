@@ -19,6 +19,11 @@ export const REGISTER_INITIAL_VALUES = {
   confirmPassword: ''
 }
 
+export const SETTINGS_INITIAL_VALUES = {
+  name: '',
+  password: ''
+}
+
 export const SIDEBAR_LINKS = [
   { href: '/', icon: HomeIcon },
   { href: '/settings', icon: SettingsIcon },

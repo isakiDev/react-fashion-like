@@ -25,9 +25,9 @@ export const ConfirmUserPage = () => {
   }, [])
 
   return (
-    <>
-      <div>User</div>
+    <section >
+      <h1>User</h1>
       { userVerified && <Link to='/auth/login'>Login</Link>}
-    </>
+    </section>
   )
 }
