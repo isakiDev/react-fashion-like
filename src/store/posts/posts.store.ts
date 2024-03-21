@@ -6,6 +6,8 @@ export interface PostsSlice {
   posts: PostsResponse[]
 
   addPosts: (posts: PostsResponse[]) => void
+  addPost: (post: PostsResponse) => void
+
   addComment: (user: User, postId: number, commentId: number, comment: string) => void
   toggleLike: (user: User, postId: number, likeId?: number | undefined) => void
 }
@@ -15,6 +17,13 @@ export const createPostSlice: StateCreator<PostsSlice> = (set) => ({
 
   addPosts: (posts: PostsResponse[]) => {
     set({ posts })
+  },
+
+  addPost: (post: PostsResponse) => {
+    set(state => ({
+      ...state,
+      posts: [...state.posts, { ...post }]
+    }))
   },
 
   // TODO: think about separate in another slices
@@ -42,7 +51,7 @@ export const createPostSlice: StateCreator<PostsSlice> = (set) => ({
         if (post.id === postId) {
           return {
             ...post,
-            likes: !likeId ? post.likes.filter(like => like.user.id !== user.id) : [...post.likes, { id: likeId, user }]
+            likes: !likeId ? post?.likes.filter(like => like?.user.id !== user?.id) : [...post.likes, { id: likeId, user }]
           }
         }
         return post
