@@ -26,7 +26,7 @@ export const CardPost = ({ post }: Props) => {
 
   useEffect(() => {
     if (isLoggedIn) {
-      const like = likes.some(like => like.user.id === user?.id)
+      const like = likes?.some(like => like?.user?.id === user?.id)
       setHasLiked(like)
     }
   }, [posts])
@@ -74,9 +74,9 @@ export const CardPost = ({ post }: Props) => {
           </div>
         </div>
 
-        <div className="font-semibold text-sm mx-4 mt-2 mb-4">{likes.length}</div>
+        <div className="font-semibold text-sm mx-4 mt-2 mb-4">{likes?.length ?? 0}</div>
 
-        { commentBoxOpen && <CommentBox postId={post.id} comments={post.comments}/> }
+        { commentBoxOpen && <CommentBox comments={post?.comments} postId={post.id}/> }
 
       </div>
     </div>
