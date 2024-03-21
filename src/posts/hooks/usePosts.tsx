@@ -1,6 +1,7 @@
 import { useBoundStore } from '../../store/bound.store'
-import { getAllPosts, addCommentPost, toggleLikePost } from '../services/post.service'
+import { getAllPosts, addCommentPost, toggleLikePost, createPost } from '../services/post.service'
 import { useAuth } from '../../auth'
+import { type PostRequest } from '../../types'
 
 export const usePosts = () => {
   const { user } = useAuth()
@@ -8,6 +9,7 @@ export const usePosts = () => {
 
   const posts = useBoundStore(state => state.posts)
   const addPosts = useBoundStore(state => state.addPosts)
+  const addPost = useBoundStore(state => state.addPost)
   const addComment = useBoundStore(state => state.addComment)
   const toggleLike = useBoundStore(state => state.toggleLike)
 
@@ -21,6 +23,21 @@ export const usePosts = () => {
     }
   }
 
+  const onCreatePost = async (payload: PostRequest) => {
+    const token = window.localStorage.getItem('TOKEN')
+    if (!token) return onLogout(null)
+
+    try {
+      const post = await createPost(token, payload)
+
+      post.likes = []
+
+      addPost(post)
+    } catch (error) {
+      throw error
+    }
+  }
+  //! ----------------
   const onAddComment = async (postId: number, comment: string) => {
     const token = window.localStorage.getItem('TOKEN')
     if (!token) return onLogout(null)
@@ -52,6 +69,7 @@ export const usePosts = () => {
     posts,
 
     onGetPosts,
+    onCreatePost,
     onAddComment,
     onToggleLike
   }
