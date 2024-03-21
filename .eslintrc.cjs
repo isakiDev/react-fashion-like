@@ -35,6 +35,12 @@ module.exports = {
         "@typescript-eslint/no-confusing-void-expression": "off",
 
         "@typescript-eslint/no-misused-promises": "off",
-        "@typescript-eslint/no-non-null-assertion": "off"
+        "@typescript-eslint/no-non-null-assertion": "off",
+
+        // jsx
+        'react/jsx-closing-bracket-location': 'error',
+        'react/jsx-indent-props': ['error', 2],
+        'react/jsx-indent': ['error', 2],
+        'react/jsx-sort-props': 'error'
     }
 }
