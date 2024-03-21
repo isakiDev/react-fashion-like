@@ -31,9 +31,9 @@ export const LoginPage = () => {
     <main className="md:flex items-center justify-center h-screen max-w-[1000px] m-auto">
       <div className='flex flex-col md:flex-row h-[500px] gap-6'>
         <img
-          src="https://upload.wikimedia.org/wikipedia/commons/4/45/Gisele_Bundchen2.jpg"
           alt="image"
           className='hidden md:block rounded-md shadow-md'
+          src="https://upload.wikimedia.org/wikipedia/commons/4/45/Gisele_Bundchen2.jpg"
         />
 
         <div className='flex flex-col gap-4 mx-4'>
@@ -50,17 +50,17 @@ export const LoginPage = () => {
                 <Form className='flex flex-col gap-10 text-center md:border-2 p-7'>
                   <h1 className="text-2xl font-bold">Fashion Like</h1>
                   <div className='flex flex-col gap-1'>
-                    <InputFormik name='email' type='text' placeholder='Enter email' />
+                    <InputFormik name='email' placeholder='Enter email' type='text' />
                     <ErrorMessageFormik component='span' name='email' />
 
-                    <InputFormik name='password' type='password' placeholder='Enter password' />
+                    <InputFormik name='password' placeholder='Enter password' type='password' />
                     <ErrorMessageFormik component='span' name='password' />
 
                   </div>
 
                   <button
-                    disabled={isSubmitting}
                     className="p-2 bg-indigo-600 text-white rounded-md"
+                    disabled={isSubmitting}
                     type='submit'
                   >Login</button>
                 </Form>
@@ -74,7 +74,8 @@ export const LoginPage = () => {
             <span>You do not have an account?</span>
             <Link
               className='text-blue-500 font-semibold'
-              to='/auth/register'>Sign up</Link>
+              to='/auth/register'
+            >Sign up</Link>
           </div>
         </div>
       </div>
