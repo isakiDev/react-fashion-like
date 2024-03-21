@@ -36,14 +36,14 @@ export const CommentBox = ({ postId, comments }: Props) => {
   return (
     <section className='flex flex-col p-4 gap-5'>
       <div className='flex gap-2 items-center'>
-        <img className="object-cover h-9 w-9 rounded-full" src={user?.image} alt='User image' />
-        <form onSubmit={handleSubmitComment} className='flex-1'>
+        <img alt='User image' className="object-cover h-9 w-9 rounded-full" src={user?.image} />
+        <form className='flex-1' onSubmit={handleSubmitComment}>
           <input
-            ref={commentRef}
             className="px-2 py-1 border w-full rounded-2xl resize-none overflow-hidden"
-            placeholder="Add new comment"
-            name='comment'
             maxLength={25}
+            name='comment'
+            placeholder="Add new comment"
+            ref={commentRef}
           />
         </form>
       </div>
