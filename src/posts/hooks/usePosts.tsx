@@ -30,6 +30,7 @@ export const usePosts = () => {
       const post = await createPost(token, payload)
 
       post.likes = []
+      post.comments = []
 
       addPost(post)
     } catch (error) {
@@ -37,6 +38,7 @@ export const usePosts = () => {
     }
   }
   //! ----------------
+
   const onAddComment = async (postId: number, comment: string) => {
     const token = window.localStorage.getItem('TOKEN')
     if (!token) return onLogout(null)
