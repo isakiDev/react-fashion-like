@@ -54,10 +54,10 @@ export interface PostsResponse {
   likes: Like[]
 }
 
-export interface PostRequest {
-  description: string
-  image?: string
-}
+// export interface PostRequest {
+//   description: string
+//   file: File
+// }
 
 // comments
 export interface Comment {

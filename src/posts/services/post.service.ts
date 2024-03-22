@@ -1,4 +1,4 @@
-import type { PostsResponse, ErrorResponse, CommentResponse, PostRequest } from '../../types'
+import type { PostsResponse, ErrorResponse, CommentResponse } from '../../types'
 
 const API_URL = import.meta.env.VITE_API_URL
 
@@ -17,14 +17,11 @@ export const getAllPosts = async () => {
   return data
 }
 
-export const createPost = async (token: string, payload: PostRequest) => {
+export const createPost = async (token: string, payload: FormData) => {
   const resp = await fetch(`${API_URL}/post`, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`
-    },
-    body: JSON.stringify(payload)
+    headers: { Authorization: `Bearer ${token}` },
+    body: payload
   })
 
   if (!resp.ok) {

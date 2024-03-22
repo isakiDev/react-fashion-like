@@ -1,7 +1,6 @@
 import { useBoundStore } from '../../store/bound.store'
 import { getAllPosts, addCommentPost, toggleLikePost, createPost } from '../services/post.service'
 import { useAuth } from '../../auth'
-import { type PostRequest } from '../../types'
 
 export const usePosts = () => {
   const { user } = useAuth()
@@ -23,7 +22,7 @@ export const usePosts = () => {
     }
   }
 
-  const onCreatePost = async (payload: PostRequest) => {
+  const onCreatePost = async (payload: FormData) => {
     const token = window.localStorage.getItem('TOKEN')
     if (!token) return onLogout(null)
 
