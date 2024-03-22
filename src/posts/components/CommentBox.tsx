@@ -22,7 +22,7 @@ export const CommentBox = ({ postId, comments }: Props) => {
     e.preventDefault()
     const commentValue = commentRef.current?.value
 
-    if (!commentValue || commentValue.trim().length < 5) return toast.error('Invalid comment')
+    if (!commentValue || commentValue.trim().length <= 0) return toast.error('Invalid comment')
 
     toast.promise(onAddComment(postId, commentValue), {
       success: () => {
