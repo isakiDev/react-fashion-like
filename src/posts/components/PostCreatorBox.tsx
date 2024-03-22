@@ -1,9 +1,10 @@
+import { type FormEvent, useRef, useState } from 'react'
+import { toast } from 'sonner'
+
 import { useBoundStore } from '../../store/bound.store'
 import { CloseIcon, ImageIcon, Modal } from '../../ui/components'
 import { type User } from '../../types'
-import { type FormEvent, useRef, useState } from 'react'
 import { usePosts } from '..'
-import { toast } from 'sonner'
 
 interface Props {
   user: User
@@ -17,12 +18,28 @@ export const PostCreatorBox = ({ user }: Props) => {
 
   const [isSubmitted, setIsSubmitted] = useState(false)
 
-  const fileSelect = useRef<HTMLInputElement>(null)
+  const fileSelectRef = useRef<HTMLInputElement>(null)
+  const imgRef = useRef<HTMLImageElement>(null)
 
   const text = 'What do you want to talk about?'
 
   const handleClickSelectImage = () => {
-    fileSelect.current?.click()
+    if (!fileSelectRef.current) return
+    fileSelectRef.current?.click()
+  }
+
+  const showInputImage = (input: HTMLInputElement) => {
+    if (input.files && input.files[0]) {
+      const reader = new FileReader()
+
+      reader.onload = (e) => {
+        if (imgRef.current) {
+          imgRef.current.src = e.target!.result as string
+        }
+      }
+
+      reader.readAsDataURL(input.files[0])
+    }
   }
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -34,7 +51,10 @@ export const PostCreatorBox = ({ user }: Props) => {
     const description = fields.get('description')?.toString()
     // const file = fields.get('file') as File
 
-    if (!description || description?.trim().length <= 0) return toast.error('Invalid description')
+    if (!description || description?.trim().length <= 0) {
+      setIsSubmitted(false)
+      return toast.error('Invalid description')
+    }
 
     toast.promise(onCreatePost(fields), {
       loading: 'Creating post...',
@@ -45,6 +65,12 @@ export const PostCreatorBox = ({ user }: Props) => {
       error: (error) => error.message,
       finally: () => { setIsSubmitted(false) }
     })
+  }
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files) return
+
+    showInputImage(e.target)
   }
 
   return (
@@ -103,7 +129,16 @@ export const PostCreatorBox = ({ user }: Props) => {
               >Post</button>
             </div>
 
-            <input className='hidden' name='file' ref={fileSelect} type='file'/>
+            <input
+              className='hidden'
+              name='file'
+              onChange={handleChange}
+              ref={fileSelectRef}
+              type='file'
+            />
+
+            <img alt="Post image" className='pt-4 size-1/2' ref={imgRef} src="#" />
+
           </form>
         </Modal>
       }
