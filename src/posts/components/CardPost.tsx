@@ -44,8 +44,8 @@ export const CardPost = ({ post }: Props) => {
   }
 
   return (
-    <div className="flex flex-col bg-gray-100 items-center">
-      <div className="bg-white border rounded-sm max-w-md">
+    <div className="flex flex-col bg-gray-100">
+      <div className="bg-white border rounded-sm">
         <div className="flex items-center px-4 py-3">
           <img className="object-cover h-8 w-8 rounded-full" src={userPost?.image} />
           <div className="ml-3 ">
