@@ -28,6 +28,15 @@ export interface RegisterResponse {
   token: string
 }
 
+// Update
+export interface UpdateRequest {
+  name?: string
+  currentPassword?: string
+  newPassword?: string
+}
+
+export interface UpdateResponse extends User {}
+
 // error
 export interface ErrorResponse {
   message: string | string[]

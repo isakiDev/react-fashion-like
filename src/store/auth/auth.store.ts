@@ -11,6 +11,7 @@ export interface AuthSlice {
   onChecking: () => void
   onLogin: (user: User) => void
   onLogout: (error: AuthSlice['errorMessage']) => void
+  onUpdate: (user: User) => void
 
   // ?
   // clearErrorMessage: () => void
@@ -42,6 +43,12 @@ export const createAuthSlice: StateCreator<AuthSlice> = (set) => ({
       status: AUTH_STATUS.NOT_AUTHEN,
       user: null,
       errorMessage: error
+    })
+  },
+
+  onUpdate: (user) => {
+    set({
+      user
     })
   }
 })

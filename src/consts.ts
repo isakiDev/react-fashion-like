@@ -20,8 +20,7 @@ export const REGISTER_INITIAL_VALUES = {
 }
 
 export const SETTINGS_INITIAL_VALUES = {
-  name: '',
-  password: ''
+  name: ''
 }
 
 export const SIDEBAR_LINKS = [

@@ -1,4 +1,4 @@
-import type { ErrorResponse, CheckAuthResponse, LoginRequest, LoginResponse, RegisterRequest, RegisterResponse } from '../../types'
+import type { ErrorResponse, CheckAuthResponse, LoginRequest, LoginResponse, RegisterRequest, RegisterResponse, UpdateRequest, UpdateResponse } from '../../types'
 
 const API_URL = import.meta.env.VITE_API_URL
 
@@ -36,6 +36,26 @@ export const register = async (values: RegisterRequest): Promise<RegisterRespons
   return data
 }
 
+export const update = async (token: string, id: string, values: UpdateRequest) => {
+  const resp = await fetch(`${API_URL}/auth/${id}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`
+    },
+    body: JSON.stringify(values)
+  })
+
+  if (!resp.ok) {
+    const data = await resp.json() as ErrorResponse
+    handleErrorExepcion(data)
+  }
+
+  const data = await resp.json() as UpdateResponse
+
+  return data
+}
+
 export const checkAuthStatus = async (token: string): Promise<CheckAuthResponse> => {
   const resp = await fetch(`${API_URL}/auth/check-auth-status`, {
     headers: {
@@ -54,8 +74,8 @@ export const checkAuthStatus = async (token: string): Promise<CheckAuthResponse>
   return data
 }
 
-export const verifyUserEmail = async (token: string) => {
-  const resp = await fetch(`${API_URL}/auth/confirm?token=${token}`, {
+export const verifyUserEmail = async (emailToken: string) => {
+  const resp = await fetch(`${API_URL}/auth/confirm?token=${emailToken}`, {
     headers: {
       'Content-Type': 'application/json'
       // Authorization: `Bearer ${token}`,

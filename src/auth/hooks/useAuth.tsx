@@ -1,6 +1,6 @@
 import { useBoundStore } from '../../store/bound.store'
-import { login, checkAuthStatus, register, verifyUserEmail } from '..'
-import type { RegisterRequest, LoginRequest } from '../../types'
+import { login, checkAuthStatus, register, verifyUserEmail, update } from '..'
+import type { RegisterRequest, LoginRequest, UpdateRequest } from '../../types'
 
 export const useAuth = () => {
   const userStatus = useBoundStore(state => state.status)
@@ -8,6 +8,7 @@ export const useAuth = () => {
   const onLogin = useBoundStore(state => state.onLogin)
   const onLogout = useBoundStore(state => state.onLogout)
   const user = useBoundStore(state => state.user)
+  const onUpdate = useBoundStore(state => state.onUpdate)
 
   const onLoginUser = async (data: LoginRequest): Promise<void> => {
     onChecking()
@@ -35,6 +36,20 @@ export const useAuth = () => {
       // onLogin(user)
     } catch (error) {
       onLogout(null)
+      throw error
+    }
+  }
+
+  const onUpdateUser = async (data: UpdateRequest) => {
+    const token = window.localStorage.getItem('TOKEN')
+
+    if (!token) return onLogout(null)
+    if (!user?.id) return onLogout(null)
+
+    try {
+      const updatedUser = await update(token, user.id, data)
+      onUpdate(updatedUser)
+    } catch (error) {
       throw error
     }
   }
@@ -69,6 +84,7 @@ export const useAuth = () => {
     onCheckAuthToken,
     onLoginUser,
     onLogoutUser,
+    onUpdateUser,
     onRegisterUser,
     onVerifyUserEmail
   }
