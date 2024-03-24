@@ -53,7 +53,6 @@ export interface CheckAuthResponse {
 // posts
 export interface PostsResponse {
   id: number
-  title: string
   description: string
   image: string
   createdAt: string

@@ -2,7 +2,7 @@ import { type FormEvent, useRef, useState } from 'react'
 import { toast } from 'sonner'
 
 import { useBoundStore } from '../../store/bound.store'
-import { CloseIcon, ImageIcon, Modal } from '../../ui/components'
+import { CloseIcon, CustomButton, ImageIcon, Modal, UserImage } from '../../ui'
 import { type User } from '../../types'
 import { usePosts } from '..'
 
@@ -26,20 +26,6 @@ export const PostCreatorBox = ({ user }: Props) => {
   const handleClickSelectImage = () => {
     if (!fileSelectRef.current) return
     fileSelectRef.current?.click()
-  }
-
-  const showInputImage = (input: HTMLInputElement) => {
-    if (input.files && input.files[0]) {
-      const reader = new FileReader()
-
-      reader.onload = (e) => {
-        if (imgRef.current) {
-          imgRef.current.src = e.target!.result as string
-        }
-      }
-
-      reader.readAsDataURL(input.files[0])
-    }
   }
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -73,13 +59,24 @@ export const PostCreatorBox = ({ user }: Props) => {
     showInputImage(e.target)
   }
 
+  const showInputImage = (input: HTMLInputElement) => {
+    if (input.files && input.files[0]) {
+      const reader = new FileReader()
+
+      reader.onload = (e) => {
+        if (imgRef.current) {
+          imgRef.current.src = e.target!.result as string
+        }
+      }
+
+      reader.readAsDataURL(input.files[0])
+    }
+  }
+
   return (
     <section className='flex gap-2 bg-white p-4 rounded-lg shadow-sm'>
-      <img
-        alt='User image'
-        className="object-cover h-9 w-9 rounded-full"
-        src={user?.image}
-      />
+      <UserImage alt='User image' className='h-9 w-9 ' src={user?.image} />
+
       <button className='flex-1 text-gray-400  bg-gray-200 border text-gray border-gray-400 rounded-full text-start pl-4' onClick={toggleModal}>Create post</button>
 
       {isModalOpen &&
@@ -123,10 +120,10 @@ export const PostCreatorBox = ({ user }: Props) => {
             <hr />
 
             <div className='flex justify-end pt-4'>
-              <button
-                className='disabled:bg-gray-300 px-5 py-1 rounded-full bg-blue-600 font-semibold text-gray-100'
+              <CustomButton
+                className='disabled:bg-gray-300 rounded-full font-semibold px-4 py-1'
                 disabled={isSubmitted}
-              >Post</button>
+              >Post</CustomButton>
             </div>
 
             <input

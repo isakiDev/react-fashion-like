@@ -5,7 +5,7 @@ import * as Yup from 'yup'
 
 import { toast } from 'sonner'
 
-import { ErrorMessageFormik, InputFormik } from '../../ui/components'
+import { CustomButton, ErrorMessageFormik, InputFormik } from '../../ui'
 import { LOGIN_INITIAL_VALUES } from '../../consts'
 import { useAuth } from '..'
 
@@ -57,12 +57,7 @@ export const LoginPage = () => {
                     <ErrorMessageFormik component='span' name='password' />
 
                   </div>
-
-                  <button
-                    className="p-2 bg-indigo-600 text-white rounded-md"
-                    disabled={isSubmitting}
-                    type='submit'
-                  >Login</button>
+                  <CustomButton className='rounded' disabled={isSubmitting} type='submit'>Login</CustomButton>
                 </Form>
               )
             }

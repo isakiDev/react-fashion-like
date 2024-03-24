@@ -7,7 +7,7 @@ import { router } from './router/router'
 import { postsRouter } from './posts'
 import { AUTH_STATUS } from './consts'
 import { useAuth } from './auth'
-import { Spinner } from './ui/components'
+import { Spinner } from './ui'
 // import { authRouter } from './auth'
 
 export const App = () => {

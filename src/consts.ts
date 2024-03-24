@@ -1,5 +1,5 @@
 import { string } from 'yup'
-import { HomeIcon, LogoutIcon, SettingsIcon } from './ui/components'
+import { HomeIcon, LogoutIcon, SettingsIcon } from './ui'
 // import { type LoginRequest } from './types'
 
 export enum AUTH_STATUS {

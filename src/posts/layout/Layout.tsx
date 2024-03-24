@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom'
 
-import { Sidebar } from '../../ui/components'
+import { Sidebar } from '../../ui'
 import { AUTH_STATUS } from '../../consts'
 import { useAuth } from '../../auth'
 

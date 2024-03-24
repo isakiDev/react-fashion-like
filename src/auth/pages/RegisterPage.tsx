@@ -5,7 +5,7 @@ import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 
 import { useAuth } from '..'
-import { ErrorMessageFormik, InputFormik } from '../../ui/components'
+import { CustomButton, ErrorMessageFormik, InputFormik } from '../../ui'
 import { REGISTER_INITIAL_VALUES } from '../../consts'
 
 interface RegisterInputs {
@@ -31,9 +31,9 @@ export const RegisterPage = () => {
     <main className="md:flex items-center justify-center h-screen max-w-[1000px] m-auto">
       <div className='flex flex-col md:flex-row h-[500px] gap-6'>
         <img
-          src="https://upload.wikimedia.org/wikipedia/commons/4/45/Gisele_Bundchen2.jpg"
           alt="image"
           className='hidden md:block rounded-md shadow-md'
+          src="https://upload.wikimedia.org/wikipedia/commons/4/45/Gisele_Bundchen2.jpg"
         />
 
         <div className='flex flex-col gap-4 mx-4'>
@@ -52,24 +52,20 @@ export const RegisterPage = () => {
                 <Form className='flex flex-col gap-10 text-center md:border-2 p-7'>
                   <h1 className="text-2xl font-bold">Fashion Like</h1>
                   <div className='flex flex-col gap-1'>
-                    <InputFormik name='name' type='text' placeholder='Enter name' />
+                    <InputFormik name='name' placeholder='Enter name' type='text' />
                     <ErrorMessageFormik component='span' name='name' />
 
-                    <InputFormik name='email' type='text' placeholder='Enter email' />
+                    <InputFormik name='email' placeholder='Enter email' type='text' />
                     <ErrorMessageFormik component='span' name='email' />
 
-                    <InputFormik name='password' type='password' placeholder='Enter password' />
+                    <InputFormik name='password' placeholder='Enter password' type='password' />
                     <ErrorMessageFormik component='span' name='password' />
 
-                    <InputFormik name='confirmPassword' type='password' placeholder='Enter password' />
+                    <InputFormik name='confirmPassword' placeholder='Enter password' type='password' />
                     <ErrorMessageFormik component='span' name='confirmPassword' />
                   </div>
 
-                  <button
-                    disabled={isSubmitting}
-                    className="p-2 bg-indigo-600 text-white rounded-md"
-                    type='submit'
-                  >Register</button>
+                  <CustomButton className='rounded' disabled={isSubmitting} type='submit'>Register</CustomButton>
                 </Form>
               )
             }
@@ -81,7 +77,8 @@ export const RegisterPage = () => {
             <span>Do you already an account?</span>
             <Link
               className='text-blue-500 font-semibold'
-              to='/auth/login'>Sign In</Link>
+              to='/auth/login'
+            >Sign In</Link>
           </div>
         </div>
       </div>

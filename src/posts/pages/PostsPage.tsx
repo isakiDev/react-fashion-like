@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+
 import { CardPost, PostCreatorBox, SkeletonPost } from '../components'
 import { usePosts } from '..'
 import { useAuth } from '../../auth'
@@ -12,13 +13,12 @@ export const PostsPage = () => {
   }, [])
 
   return (
-    <section className='p-4 w-full max-w-[500px] space-y-2'>
-
+    <main className='p-4 w-full max-w-[500px] space-y-2'>
       {user && <PostCreatorBox user={user} />}
 
       {
         (!posts)
-          ? (< SkeletonPost />)
+          ? <SkeletonPost />
           : posts?.map((post) => (
             <CardPost
               key={post.id}
@@ -26,6 +26,6 @@ export const PostsPage = () => {
             />
           ))
       }
-    </section>
+    </main>
   )
 }

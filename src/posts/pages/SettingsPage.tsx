@@ -4,7 +4,7 @@ import { toast } from 'sonner'
 
 import { useAuth } from '../../auth'
 import { SETTINGS_PERSONAL_INFORMATION, SETTINGS_CHANGE_PASSWORD } from '../../consts'
-import { ErrorMessageFormik, InputFormik } from '../../ui/components'
+import { ErrorMessageFormik, InputFormik } from '../../ui'
 
 interface UpdateInputs {
   name: string

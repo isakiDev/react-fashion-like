@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom'
 
-import { useAuth } from '../../auth'
-import { SIDEBAR_LINKS } from '../../consts'
+import { useAuth } from '../../../auth'
+import { SIDEBAR_LINKS } from '../../../consts'
 
 export const Sidebar = () => {
   const { onLogoutUser, user } = useAuth()
