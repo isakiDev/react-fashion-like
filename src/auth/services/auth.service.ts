@@ -94,8 +94,10 @@ const handleErrorExepcion = (error: ErrorResponse) => {
   const errorMessages = error.message ?? 'Error in fetch'
 
   const errors = Array.isArray(errorMessages)
-    ? errorMessages.map(error => error).join('')
+    ? errorMessages.map(error => error).join('\n')
     : errorMessages
+
+  console.log(errors)
 
   throw new Error(errors)
 }
