@@ -6,6 +6,7 @@ import { usePosts } from '..'
 import { useAuth } from '../../auth'
 import { type PostsResponse } from '../../types'
 import { CommentList } from '.'
+import { UserImage } from '../../ui'
 
 interface Props {
   postId: PostsResponse['id']
@@ -36,7 +37,7 @@ export const CommentBox = ({ postId, comments }: Props) => {
   return (
     <section className='flex flex-col p-4 gap-5'>
       <div className='flex gap-2 items-center'>
-        <img alt='User image' className="object-cover h-9 w-9 rounded-full" src={user?.image} />
+        <UserImage alt='User image' className='h-9 w-9' src={user?.image}/>
         <form className='flex-1' onSubmit={handleSubmitComment}>
           <input
             className="px-2 py-1 border w-full rounded-2xl resize-none overflow-hidden"
