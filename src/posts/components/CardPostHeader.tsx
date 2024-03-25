@@ -1,4 +1,4 @@
-import { UserImage } from '../..'
+import { UserImage } from '../../ui/components/Image/UserImage'
 
 interface Props {
   url: string

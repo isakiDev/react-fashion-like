@@ -1,8 +1,6 @@
 export * from './components/Buttons/CustomButton'
 export * from './components/Buttons/SocialIconButton'
 export * from './components/Image/UserImage'
-export * from './components/Header/CardPostHeader'
-export * from './components/Footer/CardPostFooter'
 
 export * from './components/Formik/InputFormik'
 export * from './components/Formik/ErrorMessageFormik'

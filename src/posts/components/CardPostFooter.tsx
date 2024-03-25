@@ -1,4 +1,4 @@
-import { CommentIcon, SocialIconButton } from '../..'
+import { CommentIcon, SocialIconButton } from '../../ui'
 
 interface Props {
   hasLikedIcon: JSX.Element

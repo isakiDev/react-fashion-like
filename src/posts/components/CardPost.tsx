@@ -2,12 +2,10 @@ import { useEffect, useState } from 'react'
 
 import { useAuth } from '../../auth'
 import { AUTH_STATUS } from '../../consts'
-
 import { type PostsResponse } from '../../types'
 import { usePosts } from '..'
-
-import { CardPostFooter, CardPostHeader, CommentIcon, HeartIcon, HeartIconLiked, SocialIconButton, UserImage } from '../../ui'
-import { CommentBox } from '.'
+import { HeartIcon, HeartIconLiked } from '../../ui'
+import { CardPostFooter, CardPostHeader, CommentBox } from '.'
 
 interface Props {
   post: PostsResponse
