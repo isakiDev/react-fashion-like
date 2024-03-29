@@ -97,7 +97,5 @@ const handleErrorExepcion = (error: ErrorResponse) => {
     ? errorMessages.map(error => error).join('\n')
     : errorMessages
 
-  console.log(errors)
-
   throw new Error(errors)
 }

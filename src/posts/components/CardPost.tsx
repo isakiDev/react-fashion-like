@@ -2,9 +2,8 @@ import { useEffect, useState } from 'react'
 
 import { useAuth } from '../../auth'
 import { AUTH_STATUS } from '../../consts'
-import { type PostsResponse } from '../../types'
+import { type TypeReaction, type PostsResponse } from '../../types'
 import { usePosts } from '..'
-import { HeartIcon, HeartIconLiked } from '../../ui'
 import { CardPostFooter, CardPostHeader, CommentBox } from '.'
 
 interface Props {
@@ -13,33 +12,30 @@ interface Props {
 
 export const CardPost = ({ post }: Props) => {
   const { userStatus, user } = useAuth()
-  const { onToggleLike, posts } = usePosts()
+  const { onReactionPost, posts } = usePosts()
 
-  const [commentBoxOpen, setCommentBoxOpen] = useState(false)
-  const [hasLiked, setHasLiked] = useState(false)
+  const [isCommentBoxOpen, setIsCommentBoxOpen] = useState(false)
+  const [typeReaction, setTypeReaction] = useState<TypeReaction | undefined>()
 
-  const { likes, user: userPost, image } = post
+  const { reactions, user: userPost, image } = post
 
   const isLoggedIn = userStatus === AUTH_STATUS.AUTHENTICATED
-  const hasLikedIcon = hasLiked ? <HeartIconLiked /> : <HeartIcon />
 
   useEffect(() => {
     if (isLoggedIn) {
-      const like = likes?.some(like => like?.user?.id === user?.id)
-      setHasLiked(like)
+      const foundReaction = reactions?.find(reaction => reaction?.user?.id === user?.id)
+      setTypeReaction(foundReaction?.type)
     }
   }, [posts])
 
-  const handleClickOpenCommentBox = async () => {
+  const toggleCommentBox = async () => {
     if (!isLoggedIn) return alert('User not logged in')
-
-    setCommentBoxOpen(true)
+    setIsCommentBoxOpen(true)
   }
 
-  const handleClickToggleLike = async () => {
+  const changeReactionPost = async (type: TypeReaction) => {
     if (!isLoggedIn) return alert('User not logged in')
-
-    await onToggleLike(post.id)
+    await onReactionPost(post.id, type)
   }
 
   return (
@@ -49,14 +45,14 @@ export const CardPost = ({ post }: Props) => {
       <img className='px-4 object-cover max-w-[500px] w-full' src={image} />
 
       <CardPostFooter
-        hasLikedIcon={hasLikedIcon}
-        openCommentBox={handleClickOpenCommentBox}
-        toggleLike={handleClickToggleLike}
+        changeReaction={changeReactionPost}
+        toggleCommentBox={toggleCommentBox}
+        typeReaction={typeReaction}
       />
 
-      <div className="font-semibold text-sm mx-4 mt-2 mb-4">{likes?.length ?? 0}</div>
+      {/* <div className="font-semibold text-sm mx-4 mt-2 mb-4">{reactions?.length ?? 0}</div> */}
 
-      { commentBoxOpen && <CommentBox comments={post?.comments} postId={post.id}/> }
+      { isCommentBoxOpen && <CommentBox comments={post?.comments} postId={post.id}/> }
 
     </article>
   )

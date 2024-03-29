@@ -59,7 +59,7 @@ export interface PostsResponse {
   updatedAt: string
   user: User
   comments: Comment[]
-  likes: Like[]
+  reactions: Reaction[]
 }
 
 // export interface PostRequest {
@@ -80,8 +80,22 @@ export interface CommentResponse {
   user: User
 }
 
-// likes
-export interface Like {
+// reactions
+export interface Reaction {
   id: number
-  user: User
+  type: TypeReaction
+  user: {
+    id: string
+    name: string
+  }
+}
+
+export interface ReactionResponse {
+  id: number
+  type: TypeReaction
+}
+
+export enum TypeReaction {
+  LIKE = 'LIKE',
+  DISLIKE = 'DISLIKE'
 }

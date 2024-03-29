@@ -1,4 +1,4 @@
-import type { PostsResponse, ErrorResponse, CommentResponse } from '../../types'
+import type { PostsResponse, ErrorResponse, CommentResponse, TypeReaction, ReactionResponse } from '../../types'
 
 const API_URL = import.meta.env.VITE_API_URL
 
@@ -55,14 +55,15 @@ export const addCommentPost = async (postId: number, comment: string, token: str
   return data
 }
 
-// likes
-export const toggleLikePost = async (postId: number, token: string) => {
-  const resp = await fetch(`${API_URL}/like/${postId}`, {
+// reactions
+export const handlePostReaction = async (postId: number, token: string, type: TypeReaction) => {
+  const resp = await fetch(`${API_URL}/reaction/${postId}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`
-    }
+    },
+    body: JSON.stringify({ type })
   })
 
   if (!resp.ok) {
@@ -70,7 +71,7 @@ export const toggleLikePost = async (postId: number, token: string) => {
     handleErrorExepcion(data)
   }
 
-  return await resp.json()
+  return await resp.json() as ReactionResponse | undefined
 }
 
 const handleErrorExepcion = (error: ErrorResponse) => {

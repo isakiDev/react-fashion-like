@@ -1,6 +1,7 @@
 import { useBoundStore } from '../../store/bound.store'
-import { getAllPosts, addCommentPost, toggleLikePost, createPost } from '../services/post.service'
+import { getAllPosts, addCommentPost, handlePostReaction, createPost } from '../services/post.service'
 import { useAuth } from '../../auth'
+import { type TypeReaction } from '../../types'
 
 export const usePosts = () => {
   const { user } = useAuth()
@@ -10,7 +11,7 @@ export const usePosts = () => {
   const addPosts = useBoundStore(state => state.addPosts)
   const addPost = useBoundStore(state => state.addPost)
   const addComment = useBoundStore(state => state.addComment)
-  const toggleLike = useBoundStore(state => state.toggleLike)
+  const setReaction = useBoundStore(state => state.setReaction)
 
   const onGetPosts = async () => {
     try {
@@ -29,7 +30,7 @@ export const usePosts = () => {
     try {
       const post = await createPost(token, payload)
 
-      post.likes = []
+      post.reactions = []
       post.comments = []
 
       addPost(post)
@@ -52,15 +53,16 @@ export const usePosts = () => {
     }
   }
 
-  const onToggleLike = async (postId: number) => {
+  const onReactionPost = async (postId: number, type: TypeReaction) => {
     const token = window.localStorage.getItem('TOKEN')
     if (!token) return onLogout(null)
 
     try {
       if (!user) throw new Error('User not found')
 
-      const { id } = await toggleLikePost(postId, token) as { id: number | undefined }
-      toggleLike(user, postId, id)
+      const reaction = await handlePostReaction(postId, token, type)
+
+      setReaction(user, postId, reaction)
     } catch (error) {
       throw error
     }
@@ -72,6 +74,6 @@ export const usePosts = () => {
     onGetPosts,
     onCreatePost,
     onAddComment,
-    onToggleLike
+    onReactionPost
   }
 }

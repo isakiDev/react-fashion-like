@@ -1,16 +1,21 @@
-import { CommentIcon, SocialIconButton } from '../../ui'
+import { TypeReaction } from '../../types'
+import { DislikeIcon, LikeIcon } from '../../ui'
 
 interface Props {
-  hasLikedIcon: JSX.Element
-  toggleLike: () => void
-  openCommentBox: () => void
+  typeReaction: TypeReaction | undefined
+  changeReaction: (type: TypeReaction) => Promise<void>
+  toggleCommentBox: () => void
 }
 
-export const CardPostFooter = ({ hasLikedIcon, openCommentBox, toggleLike }: Props) => {
+export const CardPostFooter = ({ typeReaction, toggleCommentBox, changeReaction }: Props) => {
+  const createReaction = async (type: TypeReaction) => {
+    await changeReaction(type)
+  }
+
   return (
-    <footer className="flex items-center px-4 gap-4">
-      <SocialIconButton onClick={toggleLike}>{hasLikedIcon}</SocialIconButton>
-      <SocialIconButton onClick={openCommentBox}>{<CommentIcon />}</SocialIconButton>
+    <footer className="p-4">
+      <button className={`hover:scale-110 ${typeReaction === TypeReaction.LIKE && 'text-blue-500'}`} onClick={async () => await createReaction(TypeReaction.LIKE)}><LikeIcon/></button>
+      <button className={`hover:scale-110 ${typeReaction === TypeReaction.DISLIKE && 'text-red-500'}`} onClick={async () => await createReaction(TypeReaction.DISLIKE)}><DislikeIcon/></button>
     </footer>
   )
 }

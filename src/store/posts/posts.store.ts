@@ -1,6 +1,6 @@
 import { type StateCreator } from 'zustand'
 
-import type { User, PostsResponse } from '../../types'
+import type { User, PostsResponse, ReactionResponse } from '../../types'
 
 export interface PostsSlice {
   posts: PostsResponse[]
@@ -9,10 +9,10 @@ export interface PostsSlice {
   addPost: (post: PostsResponse) => void
 
   addComment: (user: User, postId: number, commentId: number, comment: string) => void
-  toggleLike: (user: User, postId: number, likeId?: number | undefined) => void
+  setReaction: (user: User, postId: number, reaction?: ReactionResponse) => void
 }
 
-export const createPostSlice: StateCreator<PostsSlice> = (set) => ({
+export const createPostSlice: StateCreator<PostsSlice> = (set, get) => ({
   posts: [],
 
   addPosts: (posts: PostsResponse[]) => {
@@ -44,14 +44,30 @@ export const createPostSlice: StateCreator<PostsSlice> = (set) => ({
     }))
   },
 
-  toggleLike: (user: User, postId: number, likeId?: number | undefined) => {
+  setReaction: (user: User, postId: number, reaction?: ReactionResponse) => {
     set(state => ({
       ...state,
       posts: state.posts.map(post => {
         if (post.id === postId) {
-          return {
-            ...post,
-            likes: !likeId ? post?.likes.filter(like => like?.user.id !== user?.id) : [...post.likes, { id: likeId, user }]
+          const existingReactionIndex = post.reactions.findIndex(react => react.user.id === user.id)
+
+          if (!reaction) {
+            // Si la reacción es undefined, eliminamos la reacción del usuario
+            if (existingReactionIndex !== -1) {
+              post.reactions.splice(existingReactionIndex, 1)
+            }
+          } else {
+            if (existingReactionIndex === -1) {
+              // Si no hay una reacción existente para este usuario, agregamos la nueva
+              post.reactions.push({
+                id: reaction.id,
+                type: reaction.type,
+                user
+              })
+            } else if (post.reactions[existingReactionIndex].type !== reaction.type) {
+              // Si la reacción es diferente a la actual, actualizamos su tipo
+              post.reactions[existingReactionIndex].type = reaction.type
+            }
           }
         }
         return post
