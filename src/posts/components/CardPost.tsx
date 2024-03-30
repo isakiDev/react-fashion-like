@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 
 import { useAuth } from '../../auth'
 import { AUTH_STATUS } from '../../consts'
-import { type TypeReaction, type PostsResponse } from '../../types'
+import { TypeReaction, type PostsResponse } from '../../types'
 import { usePosts } from '..'
 import { CardPostFooter, CardPostHeader, CommentBox } from '.'
 
@@ -20,6 +20,8 @@ export const CardPost = ({ post }: Props) => {
   const { reactions, user: userPost, image } = post
 
   const isLoggedIn = userStatus === AUTH_STATUS.AUTHENTICATED
+  const likes = reactions?.filter(like => like.type === TypeReaction.LIKE).length ?? 0
+  const dislikes = reactions?.filter(dislike => dislike.type === TypeReaction.DISLIKE).length ?? 0
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -46,11 +48,11 @@ export const CardPost = ({ post }: Props) => {
 
       <CardPostFooter
         changeReaction={changeReactionPost}
+        dislikes={dislikes}
+        likes={likes}
         toggleCommentBox={toggleCommentBox}
         typeReaction={typeReaction}
       />
-
-      {/* <div className="font-semibold text-sm mx-4 mt-2 mb-4">{reactions?.length ?? 0}</div> */}
 
       { isCommentBoxOpen && <CommentBox comments={post?.comments} postId={post.id}/> }
 
