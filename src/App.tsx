@@ -8,10 +8,11 @@ import { postsRouter } from './posts'
 import { AUTH_STATUS } from './consts'
 import { useAuth } from './auth'
 import { Spinner } from './ui'
-// import { authRouter } from './auth'
+import { Roles } from './types'
+import { adminRouter } from './admin'
 
 export const App = () => {
-  const { userStatus, onCheckAuthToken } = useAuth()
+  const { userStatus, onCheckAuthToken, user } = useAuth()
 
   useEffect(() => {
     onCheckAuthToken()
@@ -22,7 +23,9 @@ export const App = () => {
   }
 
   const checkRouter = userStatus === AUTH_STATUS.AUTHENTICATED
-    ? createBrowserRouter(postsRouter)
+    ? user?.roles.includes(Roles.ADMIN)
+      ? createBrowserRouter(adminRouter)
+      : createBrowserRouter(postsRouter)
     : createBrowserRouter(router)
 
   return (

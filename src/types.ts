@@ -3,6 +3,7 @@ export interface User {
   name: string
   email: string
   image: string
+  roles: Roles[]
 }
 
 // Login
@@ -98,4 +99,9 @@ export interface ReactionResponse {
 export enum TypeReaction {
   LIKE = 'LIKE',
   DISLIKE = 'DISLIKE'
+}
+
+export enum Roles {
+  USER = 'USER',
+  ADMIN = 'ADMIN'
 }

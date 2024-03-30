@@ -12,9 +12,6 @@ export interface AuthSlice {
   onLogin: (user: User) => void
   onLogout: (error: AuthSlice['errorMessage']) => void
   onUpdate: (user: User) => void
-
-  // ?
-  // clearErrorMessage: () => void
 }
 
 export const createAuthSlice: StateCreator<AuthSlice> = (set) => ({

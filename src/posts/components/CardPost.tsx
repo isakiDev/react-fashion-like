@@ -49,7 +49,7 @@ export const CardPost = ({ post }: Props) => {
         url={userPost?.image}
       />
 
-      <img className='px-4 object-cover max-w-[500px] w-full' src={image} />
+      <img className='px-4 object-contain max-h-[300px]' src={image} />
 
       <CardPostFooter
         changeReaction={changeReactionPost}

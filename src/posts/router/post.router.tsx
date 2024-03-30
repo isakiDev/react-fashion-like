@@ -9,7 +9,7 @@ export const postsRouter: RouteObject[] = [
     element: <Layout />,
     children: [
       {
-        path: '/',
+        index: true,
         element: <PostsPage />
       },
       {
