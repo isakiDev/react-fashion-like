@@ -47,8 +47,6 @@ export const createAuthSlice: StateCreator<AuthSlice> = (set) => ({
   },
 
   onUpdate: (user) => {
-    set({
-      user
-    })
+    set({ user })
   }
 })

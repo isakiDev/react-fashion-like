@@ -12,7 +12,7 @@ export interface PostsSlice {
   setReaction: (user: User, postId: number, reaction?: ReactionResponse) => void
 }
 
-export const createPostSlice: StateCreator<PostsSlice> = (set, get) => ({
+export const createPostSlice: StateCreator<PostsSlice> = (set) => ({
   posts: [],
 
   addPosts: (posts: PostsResponse[]) => {

@@ -40,7 +40,7 @@ export const CommentBox = ({ postId, comments }: Props) => {
         <UserImage alt='User image' className='h-9 w-9' src={user?.image}/>
         <form className='flex-1' onSubmit={handleSubmitComment}>
           <input
-            className="px-2 py-1 border w-full rounded-2xl resize-none overflow-hidden"
+            className="px-3 py-1 border w-full rounded-2xl resize-none overflow-hidden"
             maxLength={25}
             name='comment'
             placeholder="Add new comment"

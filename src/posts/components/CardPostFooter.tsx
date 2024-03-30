@@ -1,5 +1,5 @@
 import { TypeReaction } from '../../types'
-import { DislikeIcon, LikeIcon } from '../../ui'
+import { CommentIcon, DislikeIcon, LikeIcon } from '../../ui'
 
 interface Props {
   typeReaction: TypeReaction | undefined
@@ -21,9 +21,22 @@ export const CardPostFooter = ({
   }
 
   return (
-    <footer className="p-4">
-      <button className={`hover:scale-110 ${typeReaction === TypeReaction.LIKE && 'text-blue-500'}`} onClick={async () => await createReaction(TypeReaction.LIKE)}><LikeIcon/>{likes}</button>
-      <button className={`hover:scale-110 ${typeReaction === TypeReaction.DISLIKE && 'text-red-500'}`} onClick={async () => await createReaction(TypeReaction.DISLIKE)}><DislikeIcon/>{dislikes}</button>
+    <footer className="flex justify-between p-4">
+      <div className='flex gap-2'>
+        <div className='flex items-center gap-1'>
+          <button className={`hover:scale-105 ${typeReaction === TypeReaction.LIKE && 'text-blue-500'}`} onClick={async () => await createReaction(TypeReaction.LIKE)}><LikeIcon/></button>
+          <span className='font-semibold text-gray-600'>{likes}</span>
+        </div>
+        <div className='flex items-center gap-1'>
+          <button className={`hover:scale-105 ${typeReaction === TypeReaction.DISLIKE && 'text-red-500'}`} onClick={async () => await createReaction(TypeReaction.DISLIKE)}><DislikeIcon/></button>
+          <span className='font-semibold text-gray-600'>{dislikes}</span>
+        </div>
+      </div>
+
+      <button
+        className='hover:scale-105'
+        onClick={toggleCommentBox}
+      ><CommentIcon /></button>
     </footer>
   )
 }

@@ -16,7 +16,7 @@ export const LogoutIcon = () => (
 )
 
 export const CommentIcon = () => (
-  <svg className="icon icon-tabler icon-tabler-message" fill="none" height="30" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" viewBox="0 0 24 24" width="30" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none" stroke="none" /><path d="M8 9h8" /><path d="M8 13h6" /><path d="M18 4a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-5l-5 3v-3h-2a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12z" /></svg>
+  <svg height="35" viewBox="0 0 24 24" width="35" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="#000" strokeLinejoin="round"><path d="M12 21a9 9 0 1 0-8-4.873L3 21l4.873-1c1.236.639 2.64 1 4.127 1" strokeLinecap="round" strokeWidth="1.5" /><path d="M7.5 12h.01v.01H7.5zm4.5 0h.01v.01H12zm4.5 0h.01v.01h-.01z" strokeWidth="2.25" /></g></svg>
 )
 
 export const ImageIcon = () => (
