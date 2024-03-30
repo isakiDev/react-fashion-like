@@ -32,7 +32,7 @@ export const LoginPage = () => {
       <div className='flex flex-col md:flex-row h-[500px] gap-6'>
         <img
           alt="image"
-          className='hidden md:block rounded-md shadow-md'
+          className='hidden md:block rounded-md'
           src="https://upload.wikimedia.org/wikipedia/commons/4/45/Gisele_Bundchen2.jpg"
         />
 
@@ -47,9 +47,9 @@ export const LoginPage = () => {
           >
             {
               ({ isSubmitting }) => (
-                <Form className='flex flex-col gap-10 text-center md:border-2 p-7'>
-                  <h1 className="text-2xl font-bold">Fashion Like</h1>
-                  <div className='flex flex-col gap-1'>
+                <Form className='flex flex-col gap-10 text-center md:border-2 md:rounded-xl p-7'>
+                  <h1 className="text-3xl font-bold text-indigo-600 text-shad">Fashion Like</h1>
+                  <div className='flex flex-col gap-2'>
                     <InputFormik name='email' placeholder='Enter email' type='text' />
                     <ErrorMessageFormik component='span' name='email' />
 
@@ -57,7 +57,7 @@ export const LoginPage = () => {
                     <ErrorMessageFormik component='span' name='password' />
 
                   </div>
-                  <CustomButton className='rounded' disabled={isSubmitting} type='submit'>Login</CustomButton>
+                  <CustomButton className='rounded-full py-1' disabled={isSubmitting} type='submit'>Login</CustomButton>
                 </Form>
               )
             }
@@ -65,7 +65,7 @@ export const LoginPage = () => {
 
           <hr />
 
-          <div className='text-center space-x-4 border p-3'>
+          <div className='text-center space-x-4 border rounded-xl p-3'>
             <span>You do not have an account?</span>
             <Link
               className='text-blue-500 font-semibold'

@@ -49,9 +49,9 @@ export const RegisterPage = () => {
           >
             {
               ({ isSubmitting }) => (
-                <Form className='flex flex-col gap-10 text-center md:border-2 p-7'>
+                <Form className='flex flex-col gap-10 text-center md:border-2 md:rounded-xl p-7'>
                   <h1 className="text-2xl font-bold">Fashion Like</h1>
-                  <div className='flex flex-col gap-1'>
+                  <div className='flex flex-col gap-2'>
                     <InputFormik name='name' placeholder='Enter name' type='text' />
                     <ErrorMessageFormik component='span' name='name' />
 
@@ -65,7 +65,7 @@ export const RegisterPage = () => {
                     <ErrorMessageFormik component='span' name='confirmPassword' />
                   </div>
 
-                  <CustomButton className='rounded' disabled={isSubmitting} type='submit'>Register</CustomButton>
+                  <CustomButton className='rounded-full py-1' disabled={isSubmitting} type='submit'>Register</CustomButton>
                 </Form>
               )
             }
@@ -73,7 +73,7 @@ export const RegisterPage = () => {
 
           <hr />
 
-          <div className='text-center space-x-4 border p-3'>
+          <div className='text-center space-x-4 border rounded-xl p-3'>
             <span>Do you already an account?</span>
             <Link
               className='text-blue-500 font-semibold'
