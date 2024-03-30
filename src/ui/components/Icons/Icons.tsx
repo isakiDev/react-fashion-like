@@ -36,5 +36,9 @@ export const DislikeIcon = () => (
 )
 
 export const PostsIcon = () => (
-  <svg height="30" viewBox="0 0 24 24" width="30" xmlns="http://www.w3.org/2000/svg"><path d="M3 1H1v18h18V1zm14 2v14H3V3zm4 18H5v2h18V5h-2zM15 5H5v2h10zM5 9h10v2H5zm7 4H5v2h7z" fill="currentColor" /></svg>
+  <svg height="25" viewBox="0 0 24 24" width="25" xmlns="http://www.w3.org/2000/svg"><path d="M3 1H1v18h18V1zm14 2v14H3V3zm4 18H5v2h18V5h-2zM15 5H5v2h10zM5 9h10v2H5zm7 4H5v2h7z" fill="currentColor" /></svg>
+)
+
+export const MenuIcon = () => (
+  <svg height="30" viewBox="0 0 24 24" width="30" xmlns="http://www.w3.org/2000/svg"><path d="M3 18v-2h18v2zm0-5v-2h18v2zm0-5V6h18v2z" fill="currentColor" /></svg>
 )
