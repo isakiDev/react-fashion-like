@@ -48,7 +48,7 @@ export const LoginPage = () => {
             {
               ({ isSubmitting }) => (
                 <Form className='flex flex-col gap-10 text-center md:border-2 md:rounded-xl p-7'>
-                  <h1 className="text-3xl font-bold text-indigo-600 text-shad">Fashion Like</h1>
+                  <h1 className="text-3xl font-bold text-indigo-600 text-shad">Login</h1>
                   <div className='flex flex-col gap-2'>
                     <InputFormik name='email' placeholder='Enter email' type='text' />
                     <ErrorMessageFormik component='span' name='email' />
