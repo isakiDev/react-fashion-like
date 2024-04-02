@@ -42,3 +42,11 @@ export const PostsIcon = () => (
 export const MenuIcon = () => (
   <svg height="30" viewBox="0 0 24 24" width="30" xmlns="http://www.w3.org/2000/svg"><path d="M3 18v-2h18v2zm0-5v-2h18v2zm0-5V6h18v2z" fill="currentColor" /></svg>
 )
+
+export const TrashIcon = () => (
+  <svg height="30" viewBox="0 0 24 24" width="30" xmlns="http://www.w3.org/2000/svg"><path d="M9 3v1H4v2h1v13a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V6h1V4h-5V3zm0 5h2v9H9zm4 0h2v9h-2z" fill="currentColor" /></svg>
+)
+
+export const EyeIcon = () => (
+  <svg height="30" viewBox="0 0 24 24" width="30" xmlns="http://www.w3.org/2000/svg"><path d="M12 4.5C7 4.5 2.7 7.6 1 12c1.7 4.4 6 7.5 11 7.5h1.1c-.1-.3-.1-.6-.1-1c0-.6.1-1.1.2-1.7c-.4.1-.8.2-1.2.2c-2.8 0-5-2.2-5-5s2.2-5 5-5s5 2.2 5 5c0 .3 0 .6-.1.9c.7-.2 1.4-.4 2.1-.4c1.2 0 2.3.3 3.3 1c.3-.5.5-1 .7-1.5c-1.7-4.4-6-7.5-11-7.5M12 9c-1.7 0-3 1.3-3 3s1.3 3 3 3s3-1.3 3-3s-1.3-3-3-3m7 12v-2h-4v-2h4v-2l3 3z" fill="currentColor" /></svg>
+)

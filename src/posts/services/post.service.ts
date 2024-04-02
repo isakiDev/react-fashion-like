@@ -34,6 +34,20 @@ export const createPost = async (token: string, payload: FormData) => {
   return data
 }
 
+export const deletePost = async (token: string, postId: number) => {
+  const resp = await fetch(`${API_URL}/post/${postId}`, {
+    method: 'DELETE',
+    headers: { Authorization: `Bearer ${token}` }
+  })
+
+  if (!resp.ok) {
+    const data = await resp.json() as ErrorResponse
+    handleErrorExepcion(data)
+  }
+
+  return true
+}
+
 // comments
 export const addCommentPost = async (postId: number, comment: string, token: string) => {
   const resp = await fetch(`${API_URL}/comment/${postId}`, {

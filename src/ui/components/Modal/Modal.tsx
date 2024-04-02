@@ -1,7 +1,7 @@
 interface Props {
   children: JSX.Element | JSX.Element[]
-  className: string
   onToggleModal: () => void
+  className?: string
 }
 
 export const Modal = ({ children, className, onToggleModal }: Props) => {

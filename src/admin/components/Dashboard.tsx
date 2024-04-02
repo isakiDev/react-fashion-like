@@ -10,7 +10,7 @@ export const Dashboard = () => {
   const [isDashboardOpen, setIsDashboardOpen] = useState(false)
 
   return (
-    <aside className={`w-[210px] absolute max-w-[250px] duration-300 ${!isDashboardOpen && ''} h-screen bg-zinc-900/90 p-4 shadow-lg space-y-6 text-gray-200`}>
+    <aside className={`w-[210px]  max-w-[250px] duration-300 ${!isDashboardOpen && ''} h-screen bg-zinc-900/90 p-4 shadow-lg space-y-6 text-gray-200`}>
       <div className='flex justify-end'>
         <button
           onClick={() => setIsDashboardOpen(!isDashboardOpen)}

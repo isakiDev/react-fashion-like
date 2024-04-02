@@ -7,6 +7,7 @@ export interface PostsSlice {
 
   addPosts: (posts: PostsResponse[]) => void
   addPost: (post: PostsResponse) => void
+  deletePost: (postId: number) => void
 
   addComment: (user: User, postId: number, commentId: number, comment: string) => void
   setReaction: (user: User, postId: number, reaction?: ReactionResponse) => void
@@ -23,6 +24,13 @@ export const createPostSlice: StateCreator<PostsSlice> = (set) => ({
     set(state => ({
       ...state,
       posts: [...state.posts, { ...post }]
+    }))
+  },
+
+  deletePost: (postId: number) => {
+    set(state => ({
+      ...state,
+      posts: state.posts.filter(post => post.id !== postId)
     }))
   },
 
