@@ -96,6 +96,8 @@ export const PostCreatorBox = ({ user }: Props) => {
             <button
               className='flex flex-1 h-0 justify-end text-gray-500 hover:text-gray-700 hover:cursor-pointer'
               onClick={toggleModal}
+              title='Close modal'
+              type='button'
             >
               <CloseIcon />
             </button>
