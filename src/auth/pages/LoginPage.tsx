@@ -17,7 +17,6 @@ interface LoginInputs {
 export const LoginPage = () => {
   const { onLoginUser } = useAuth()
 
-  // TODO: maintain form values
   const handleSubmit = async (data: LoginInputs) => {
     toast.promise(onLoginUser(data), {
       loading: 'Loading...',
@@ -28,24 +27,17 @@ export const LoginPage = () => {
 
   return (
 
-    <main className="md:flex items-center justify-center h-screen max-w-[1000px] m-auto">
-      <div className='flex flex-col md:flex-row h-[500px] gap-6'>
-        <img
-          alt="image"
-          className='hidden md:block rounded-md'
-          src="https://upload.wikimedia.org/wikipedia/commons/4/45/Gisele_Bundchen2.jpg"
-        />
-
-        <div className='flex flex-col gap-4 mx-4'>
-          <Formik
-            initialValues={LOGIN_INITIAL_VALUES}
-            onSubmit={handleSubmit}
-            validationSchema={Yup.object({
-              email: Yup.string().email().required(),
-              password: Yup.string().required()
-            })}
-          >
-            {
+    <main className="flex justify-center items-center max-w-[1000px] m-auto h-screen">
+      <div className='flex flex-col gap-4'>
+        <Formik
+          initialValues={LOGIN_INITIAL_VALUES}
+          onSubmit={handleSubmit}
+          validationSchema={Yup.object({
+            email: Yup.string().email().required(),
+            password: Yup.string().required()
+          })}
+        >
+          {
               ({ isSubmitting }) => (
                 <Form className='flex flex-col gap-10 text-center md:border-2 md:rounded-xl p-7'>
                   <h1 className="text-3xl font-bold text-indigo-600 text-shad">Login</h1>
@@ -61,17 +53,16 @@ export const LoginPage = () => {
                 </Form>
               )
             }
-          </Formik>
+        </Formik>
 
-          <hr />
+        <hr />
 
-          <div className='text-center space-x-4 border rounded-xl p-3'>
-            <span>You do not have an account?</span>
-            <Link
-              className='text-blue-500 font-semibold'
-              to='/auth/register'
-            >Sign up</Link>
-          </div>
+        <div className='text-center space-x-4 border rounded-xl p-3'>
+          <span>You do not have an account?</span>
+          <Link
+            className='text-blue-500 font-semibold'
+            to='/auth/register'
+          >Sign up</Link>
         </div>
       </div>
     </main>

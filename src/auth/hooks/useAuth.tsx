@@ -33,7 +33,6 @@ export const useAuth = () => {
       window.localStorage.setItem('TOKEN', token)
 
       onLogout(null)
-      // onLogin(user)
     } catch (error) {
       onLogout(null)
       throw error
