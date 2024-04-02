@@ -71,7 +71,7 @@ export const AdminPostsPage = () => {
   }
 
   return (
-    <section className="flex flex-col p-2 w-full">
+    <section className='w-full max-w-[1000px] mx-auto p-2'>
       { isOpenModal && currentPost && (
         <Modal
           onToggleModal={() => setIsOpenModal(!isOpenModal)}
@@ -95,6 +95,7 @@ export const AdminPostsPage = () => {
           data={data}
           fixedHeader
           pagination
+          responsive
           title='User posts'
         />
       </div>
