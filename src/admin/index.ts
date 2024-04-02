@@ -1,4 +1,3 @@
-export * from './components/Dashboard'
 export * from './layout/AdminLayout'
 
 export * from './pages/HomePage'
