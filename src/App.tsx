@@ -23,14 +23,17 @@ export const App = () => {
   }
 
   const checkRouter = userStatus === AUTH_STATUS.AUTHENTICATED
-    ? user?.roles.includes(Roles.ADMIN)
+    ? user?.roles?.includes(Roles.ADMIN)
       ? createBrowserRouter(adminRouter)
       : createBrowserRouter(postsRouter)
     : createBrowserRouter(router)
 
   return (
     <>
-      <Toaster/>
+      <Toaster
+        closeButton
+        position='top-right'
+      />
       <RouterProvider router={checkRouter}/>
     </>
   )
