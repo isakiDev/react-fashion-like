@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import DataTable, { type TableColumn } from 'react-data-table-component'
+import { toast } from 'sonner'
 
 import { CardPostHeader, usePosts } from '../../posts'
 import { EyeIcon, Modal, TrashIcon } from '../../ui'
@@ -52,7 +53,7 @@ export const AdminPostsPage = () => {
     },
     {
       name: '',
-      cell: row => <button className='text-red-600 hover:text-red-500' onClick={async () => await onDeletePost(row.id)} type='button'><TrashIcon/></button>,
+      cell: row => <button className='text-red-600 hover:text-red-500' onClick={async () => await handleClickDeletePost(row.id)} type='button'><TrashIcon/></button>,
       width: '60px'
     },
     {
@@ -68,6 +69,17 @@ export const AdminPostsPage = () => {
 
     setCurrentPost(post)
     setIsOpenModal(true)
+  }
+
+  const handleClickDeletePost = async (postId: number) => {
+    const resp = window.confirm('Do you want to delete the post?')
+    if (!resp) return
+
+    toast.promise(onDeletePost(postId), {
+      loading: 'Loading...',
+      success: 'Post deleted',
+      error: (error) => toast.error((error.message as string))
+    })
   }
 
   return (
