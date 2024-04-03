@@ -8,7 +8,7 @@ export const Modal = ({ children, className, onToggleModal }: Props) => {
   return (
     <>
       <div
-        className='absolute inset-0 bg-slate-200/80 flex justify-center'
+        className='fixed inset-0 bg-slate-200/80 flex justify-center'
         onClick={onToggleModal}
       />
 
