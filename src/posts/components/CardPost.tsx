@@ -46,6 +46,7 @@ export const CardPost = ({ post }: Props) => {
         date={createdAt}
         description={description}
         name={userPost?.name}
+        showActions={user?.id === userPost.id}
         url={userPost?.image}
       />
 
