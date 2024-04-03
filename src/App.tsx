@@ -4,7 +4,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { Toaster } from 'sonner'
 
 import { router } from './router/router'
-import { postsRouter } from './posts'
+import { postsRouterAutenticated } from './posts'
 import { AUTH_STATUS } from './consts'
 import { useAuth } from './auth'
 import { Spinner } from './ui'
@@ -24,9 +24,9 @@ export const App = () => {
 
   const checkRouter = userStatus === AUTH_STATUS.AUTHENTICATED
     ? user?.roles?.includes(Roles.ADMIN)
-      ? createBrowserRouter(adminRouter)
-      : createBrowserRouter(postsRouter)
-    : createBrowserRouter(router)
+      ? adminRouter
+      : postsRouterAutenticated
+    : router
 
   return (
     <>
@@ -34,7 +34,7 @@ export const App = () => {
         closeButton
         position='top-right'
       />
-      <RouterProvider router={checkRouter}/>
+      <RouterProvider router={createBrowserRouter(checkRouter)}/>
     </>
   )
 }
