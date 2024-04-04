@@ -1,5 +1,5 @@
 import { useBoundStore } from '../../store/bound.store'
-import { getAllPosts, addCommentPost, handlePostReaction, createPost, deletePost } from '../services/post.service'
+import { getAllPosts, addCommentPost, handlePostReaction, createPost, deletePost, updatePost } from '../services/post.service'
 import { useAuth } from '../../auth'
 import { type TypeReaction } from '../../types'
 
@@ -10,6 +10,7 @@ export const usePosts = () => {
   const posts = useBoundStore(state => state.posts)
   const addPosts = useBoundStore(state => state.addPosts)
   const addPost = useBoundStore(state => state.addPost)
+  const updatePostStore = useBoundStore(state => state.updatePost)
   const addComment = useBoundStore(state => state.addComment)
   const setReaction = useBoundStore(state => state.setReaction)
   const deletePostStore = useBoundStore(state => state.deletePost)
@@ -68,6 +69,18 @@ export const usePosts = () => {
     }
   }
 
+  const onUpdatePost = async (postId: number, description: string) => {
+    const token = window.localStorage.getItem('TOKEN')
+    if (!token) return onLogout(null)
+
+    try {
+      const post = await updatePost(token, postId, description)
+      updatePostStore(post)
+    } catch (error) {
+      throw error
+    }
+  }
+
   const onDeletePost = async (postId: number) => {
     const token = window.localStorage.getItem('TOKEN')
     if (!token) return onLogout(null)
@@ -86,6 +99,7 @@ export const usePosts = () => {
 
     onGetPosts,
     onCreatePost,
+    onUpdatePost,
     onAddComment,
     onReactionPost,
     onDeletePost
