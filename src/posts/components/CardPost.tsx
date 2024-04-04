@@ -17,7 +17,7 @@ export const CardPost = ({ post }: Props) => {
   const [isCommentBoxOpen, setIsCommentBoxOpen] = useState(false)
   const [typeReaction, setTypeReaction] = useState<TypeReaction | undefined>()
 
-  const { reactions, user: userPost, image, description, createdAt } = post
+  const { reactions, user: userPost, image } = post
 
   const isLoggedIn = userStatus === AUTH_STATUS.AUTHENTICATED
   const likes = reactions?.filter(like => like.type === TypeReaction.LIKE).length ?? 0
@@ -41,16 +41,13 @@ export const CardPost = ({ post }: Props) => {
   }
 
   return (
-    <article className="flex flex-col bg-gray-50 border rounded-sm">
+    <article className="flex flex-col bg-gray-50 border rounded-md">
       <CardPostHeader
-        date={createdAt}
-        description={description}
-        name={userPost?.name}
+        post={post}
         showActions={user?.id === userPost.id}
-        url={userPost?.image}
       />
 
-      <img className='px-4 object-contain max-h-[300px]' src={image} />
+      <img alt='Post image' className='max-h-[400px] object-contain' src={image} />
 
       <CardPostFooter
         changeReaction={changeReactionPost}
