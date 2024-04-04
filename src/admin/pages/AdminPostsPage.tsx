@@ -5,11 +5,12 @@ import { toast } from 'sonner'
 import { CardPostHeader, usePosts } from '../../posts'
 import { EyeIcon, Modal, TrashIcon } from '../../ui'
 import { type PostsResponse } from '../../types'
+import { useModal } from '../../ui/hooks/useModal'
 
 export const AdminPostsPage = () => {
   const { posts, onGetPosts, onDeletePost } = usePosts()
 
-  const [isOpenModal, setIsOpenModal] = useState(false)
+  const { isOpenModal, toggleModal } = useModal()
   const [currentPost, setCurrentPost] = useState<PostsResponse | null>()
 
   useEffect(() => {
@@ -78,23 +79,18 @@ export const AdminPostsPage = () => {
     toast.promise(onDeletePost(postId), {
       loading: 'Loading...',
       success: 'Post deleted',
-      error: (error) => toast.error((error.message as string))
+      error: (error) => error.message
     })
   }
 
   return (
     <section className='w-full max-w-[1000px] mx-auto p-2'>
-      { isOpenModal && currentPost && (
+      {isOpenModal && currentPost && (
         <Modal
-          onToggleModal={() => setIsOpenModal(!isOpenModal)}
+          onToggleModal={toggleModal}
         >
           <div className='flex flex-col'>
-            <CardPostHeader
-              date={currentPost?.createdAt}
-              description={currentPost?.description}
-              name={currentPost?.user?.name}
-              url={currentPost?.user?.image}
-            />
+            <CardPostHeader post={currentPost}/>
 
             <img className='p-4 object-contain max-h-[300px]' src={currentPost.image} />
           </div>
