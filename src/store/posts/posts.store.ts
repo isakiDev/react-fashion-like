@@ -1,6 +1,6 @@
 import { type StateCreator } from 'zustand'
 
-import type { User, PostsResponse, ReactionResponse } from '../../types'
+import type { User, PostsResponse, ReactionResponse, UpdatePostResponse } from '../../types'
 
 export interface PostsSlice {
   posts: PostsResponse[]
@@ -8,6 +8,7 @@ export interface PostsSlice {
   addPosts: (posts: PostsResponse[]) => void
   addPost: (post: PostsResponse) => void
   deletePost: (postId: number) => void
+  updatePost: (post: UpdatePostResponse) => void
 
   addComment: (user: User, postId: number, commentId: number, comment: string) => void
   setReaction: (user: User, postId: number, reaction?: ReactionResponse) => void
@@ -31,6 +32,21 @@ export const createPostSlice: StateCreator<PostsSlice> = (set) => ({
     set(state => ({
       ...state,
       posts: state.posts.filter(post => post.id !== postId)
+    }))
+  },
+
+  updatePost: (post: UpdatePostResponse) => {
+    set(state => ({
+      ...state,
+      posts: state.posts.map(currentPost => {
+        if (currentPost.id === post.id) {
+          return {
+            ...currentPost,
+            ...post
+          }
+        }
+        return currentPost
+      })
     }))
   },
 
