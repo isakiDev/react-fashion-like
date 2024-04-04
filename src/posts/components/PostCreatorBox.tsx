@@ -1,10 +1,10 @@
 import { type FormEvent, useRef, useState } from 'react'
 import { toast } from 'sonner'
 
-import { useBoundStore } from '../../store/bound.store'
 import { CloseIcon, CustomButton, ImageIcon, Modal, UserImage } from '../../ui'
 import { type User } from '../../types'
 import { usePosts } from '..'
+import { useModal } from '../../ui/hooks/useModal'
 
 interface Props {
   user: User
@@ -13,15 +13,11 @@ interface Props {
 export const PostCreatorBox = ({ user }: Props) => {
   const { onCreatePost } = usePosts()
 
-  const toggleModal = useBoundStore(state => state.toggleState)
-  const isModalOpen = useBoundStore(state => state.isOpen)
-
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const { isOpenModal, toggleModal } = useModal()
 
   const fileSelectRef = useRef<HTMLInputElement>(null)
   const imgRef = useRef<HTMLImageElement>(null)
-
-  const text = 'What do you want to talk about?'
 
   const handleClickSelectImage = () => {
     if (!fileSelectRef.current) return
@@ -74,12 +70,12 @@ export const PostCreatorBox = ({ user }: Props) => {
   }
 
   return (
-    <section className='flex gap-2 bg-white p-4 rounded-lg shadow-sm'>
+    <section className='flex gap-2 bg-white p-4 rounded-md shadow-sm'>
       <UserImage alt='User image' className='h-9 w-9 ' src={user?.image} />
 
       <button className='flex-1 text-gray-400  bg-gray-200 border text-gray border-gray-400 rounded-full text-start pl-4' onClick={toggleModal}>Create post</button>
 
-      {isModalOpen &&
+      {isOpenModal &&
         <Modal
           className='p-4 flex flex-col gap-8'
           onToggleModal={toggleModal}
@@ -108,7 +104,7 @@ export const PostCreatorBox = ({ user }: Props) => {
             <textarea
               className='w-full outline-none resize-none bg-gray-50'
               name='description'
-              placeholder={text} rows={10}
+              placeholder={'What do you want to talk about?'} rows={10}
             >
             </textarea>
 
@@ -136,7 +132,7 @@ export const PostCreatorBox = ({ user }: Props) => {
               type='file'
             />
 
-            <img alt="Post image" className='pt-4 size-1/2' ref={imgRef} src="#" />
+            <img alt="Post image" className='pt-4 size-1/4' ref={imgRef} src="#" />
 
           </form>
         </Modal>
