@@ -63,10 +63,7 @@ export interface PostsResponse {
   reactions: Reaction[]
 }
 
-// export interface PostRequest {
-//   description: string
-//   file: File
-// }
+export interface UpdatePostResponse extends Omit<PostsResponse, 'user' | 'comments' | 'reactions'> {}
 
 // comments
 export interface Comment {
