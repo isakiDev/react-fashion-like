@@ -12,8 +12,8 @@ export const Modal = ({ children, className, onToggleModal }: Props) => {
         onClick={onToggleModal}
       />
 
-      <div className='fixed left-0 right-0 max-w-[500px] mx-auto z-10'>
-        <div className={`bg-gray-50 shadow-lg rounded-lg ${className} mx-4 lg:mx-0`}>
+      <div className='fixed top-10 left-0 right-0 max-w-[500px] mx-auto z-10 overflow-y-auto h-screen px-4'>
+        <div className={`bg-gray-50 shadow-lg rounded-lg ${className} `}>
           {children}
         </div>
       </div>
