@@ -89,7 +89,6 @@ export const SettingsPage = () => {
           )
         }
       </Formik>
-
     </section>
   )
 }
