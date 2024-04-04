@@ -1,4 +1,4 @@
-import type { PostsResponse, ErrorResponse, CommentResponse, TypeReaction, ReactionResponse } from '../../types'
+import type { PostsResponse, ErrorResponse, CommentResponse, TypeReaction, ReactionResponse, UpdatePostResponse } from '../../types'
 
 const API_URL = import.meta.env.VITE_API_URL
 
@@ -46,6 +46,26 @@ export const deletePost = async (token: string, postId: number) => {
   }
 
   return true
+}
+
+export const updatePost = async (token: string, postId: number, description: string) => {
+  const resp = await fetch(`${API_URL}/post/${postId}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`
+    },
+    body: JSON.stringify({ description })
+  })
+
+  if (!resp.ok) {
+    const data = await resp.json() as ErrorResponse
+    handleErrorExepcion(data)
+  }
+
+  const data = await resp.json() as UpdatePostResponse
+
+  return data
 }
 
 // comments
