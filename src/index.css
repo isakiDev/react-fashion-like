@@ -5,3 +5,7 @@
 :root {
   background-color: whitesmoke;
 }
+
+body {
+  overflow: hidden;
+}
