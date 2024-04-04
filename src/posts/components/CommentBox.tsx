@@ -14,8 +14,6 @@ interface Props {
 }
 
 export const CommentBox = ({ postId, comments }: Props) => {
-  console.log(comments)
-
   const { user } = useAuth()
   const { onAddComment } = usePosts()
 
