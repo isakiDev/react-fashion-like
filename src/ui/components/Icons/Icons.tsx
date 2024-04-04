@@ -50,3 +50,7 @@ export const TrashIcon = () => (
 export const EyeIcon = () => (
   <svg height="30" viewBox="0 0 24 24" width="30" xmlns="http://www.w3.org/2000/svg"><path d="M12 4.5C7 4.5 2.7 7.6 1 12c1.7 4.4 6 7.5 11 7.5h1.1c-.1-.3-.1-.6-.1-1c0-.6.1-1.1.2-1.7c-.4.1-.8.2-1.2.2c-2.8 0-5-2.2-5-5s2.2-5 5-5s5 2.2 5 5c0 .3 0 .6-.1.9c.7-.2 1.4-.4 2.1-.4c1.2 0 2.3.3 3.3 1c.3-.5.5-1 .7-1.5c-1.7-4.4-6-7.5-11-7.5M12 9c-1.7 0-3 1.3-3 3s1.3 3 3 3s3-1.3 3-3s-1.3-3-3-3m7 12v-2h-4v-2h4v-2l3 3z" fill="currentColor" /></svg>
 )
+
+export const EditIcon = () => (
+  <svg height="25" viewBox="0 0 24 24" width="25" xmlns="http://www.w3.org/2000/svg"><path d="M3 21v-4.25L16.2 3.575q.3-.275.663-.425t.762-.15q.4 0 .775.15t.65.45L20.425 5q.3.275.438.65T21 6.4q0 .4-.137.763t-.438.662L7.25 21zM17.6 7.8L19 6.4L17.6 5l-1.4 1.4z" fill="currentColor" /></svg>
+)
