@@ -69,7 +69,7 @@ export const AdminPostsPage = () => {
     if (!post) return
 
     setCurrentPost(post)
-    setIsOpenModal(true)
+    toggleModal()
   }
 
   const handleClickDeletePost = async (postId: number) => {
@@ -97,16 +97,14 @@ export const AdminPostsPage = () => {
         </Modal>
       )}
 
-      <div>
-        <DataTable
-          columns={columns}
-          data={data}
-          fixedHeader
-          pagination
-          responsive
-          title='User posts'
-        />
-      </div>
+      <DataTable
+        columns={columns}
+        data={data}
+        fixedHeader
+        pagination
+        responsive
+        title='User posts'
+      />
     </section>
   )
 }

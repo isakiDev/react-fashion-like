@@ -125,6 +125,7 @@ export const PostCreatorBox = ({ user }: Props) => {
             </div>
 
             <input
+              accept='image/jpeg, image/png, image/jpg, image/gif'
               className='hidden'
               name='file'
               onChange={handleChange}
