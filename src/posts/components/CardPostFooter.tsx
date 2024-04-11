@@ -21,7 +21,7 @@ export const CardPostFooter = ({
   }
 
   return (
-    <footer className="flex justify-between p-4">
+    <footer className="flex justify-between">
       <div className='flex gap-2'>
         <div className='flex items-center gap-1'>
           <button className={`hover:scale-105 ${typeReaction === TypeReaction.LIKE && 'text-blue-500'}`} onClick={async () => await createReaction(TypeReaction.LIKE)}><LikeIcon/></button>

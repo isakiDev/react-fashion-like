@@ -4,11 +4,13 @@ import type { User, PostsResponse, ReactionResponse, UpdatePostResponse } from '
 
 export interface PostsSlice {
   posts: PostsResponse[]
+  isPostsLoading: boolean
 
   addPosts: (posts: PostsResponse[]) => void
   addPost: (post: PostsResponse) => void
   deletePost: (postId: number) => void
   updatePost: (post: UpdatePostResponse) => void
+  setIsLoadingPost: (isLoading: boolean) => void
 
   addComment: (user: User, postId: number, commentId: number, comment: string) => void
   setReaction: (user: User, postId: number, reaction?: ReactionResponse) => void
@@ -16,9 +18,10 @@ export interface PostsSlice {
 
 export const createPostSlice: StateCreator<PostsSlice> = (set) => ({
   posts: [],
+  isPostsLoading: true,
 
   addPosts: (posts: PostsResponse[]) => {
-    set({ posts })
+    set({ posts, isPostsLoading: false })
   },
 
   addPost: (post: PostsResponse) => {
@@ -97,5 +100,9 @@ export const createPostSlice: StateCreator<PostsSlice> = (set) => ({
         return post
       })
     }))
+  },
+
+  setIsLoadingPost: (isLoading: boolean) => {
+    set({ isPostsLoading: isLoading })
   }
 })

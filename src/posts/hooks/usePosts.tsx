@@ -14,8 +14,12 @@ export const usePosts = () => {
   const addComment = useBoundStore(state => state.addComment)
   const setReaction = useBoundStore(state => state.setReaction)
   const deletePostStore = useBoundStore(state => state.deletePost)
+  const setIsLoadingPost = useBoundStore(state => state.setIsLoadingPost)
+  const isPostsLoading = useBoundStore(state => state.isPostsLoading)
 
   const onGetPosts = async () => {
+    setIsLoadingPost(true)
+
     try {
       const posts = await getAllPosts()
       addPosts(posts)
@@ -96,6 +100,7 @@ export const usePosts = () => {
 
   return {
     posts,
+    isPostsLoading,
 
     onGetPosts,
     onCreatePost,

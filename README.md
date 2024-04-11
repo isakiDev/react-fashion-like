@@ -1,9 +1,8 @@
 # Task
-- add immer in stores
 - fix navigate
 
 Requisitos:
-- [x] sLos usuarios deben poder loguearse con email y contraseña.
+- [x] Los usuarios deben poder loguearse con email y contraseña.
 - [x] El usuario debe poder ver todos los posteos en orden cronológico empezando desde el
 más reciente.
 - [x] En cada posteo se puede elegir “like” o “dislike”.

@@ -80,7 +80,7 @@ export const PostCreatorBox = ({ user }: Props) => {
           className='p-4 flex flex-col gap-8'
           onToggleModal={toggleModal}
         >
-          <header className='flex gap-4'>
+          <header className='flex gap-4 sticky top-0 bg-gray-50'>
             <img
               alt='User image'
               className="object-cover h-14 w-1h-14 rounded-full"

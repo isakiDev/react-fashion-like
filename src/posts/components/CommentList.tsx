@@ -11,7 +11,7 @@ export const CommentList = ({ comments }: Props) => {
       { comments?.map(({ id, comment, user }) => (
         <div className='flex gap-2' key={id}>
           <UserImage alt='User image' className='h-9 w-9' src={user?.image} />
-          <div className='p-2 bg-gray-200 rounded-md flex-1'>
+          <div className='p-2 bg-[#f2f2f2] rounded-md flex-1'>
             <h1 className='text-sm font-semibold'>{user?.name}</h1>
             <p>{comment}</p>
           </div>

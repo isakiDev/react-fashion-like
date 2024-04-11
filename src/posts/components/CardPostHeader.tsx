@@ -8,12 +8,12 @@ interface Props {
 }
 
 export const CardPostHeader = ({ post, showActions = false }: Props) => {
-  const { user, description, createdAt } = post
+  const { user, createdAt } = post
 
   const newDate = new Date(createdAt).toDateString()
 
   return (
-    <header className="flex flex-col px-4 py-3 gap-4">
+    <header className="flex flex-col gap-4">
       <div className='flex justify-between'>
         <div className='flex items-center'>
           <UserImage className='h-8 w-8' src={user?.image} />
@@ -26,8 +26,6 @@ export const CardPostHeader = ({ post, showActions = false }: Props) => {
         {showActions && <CardPostActions post={post} />}
 
       </div>
-
-      <p className=' whitespace-pre-line break-all'>{description}</p>
     </header>
   )
 }

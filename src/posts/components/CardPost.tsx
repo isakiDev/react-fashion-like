@@ -41,13 +41,16 @@ export const CardPost = ({ post }: Props) => {
   }
 
   return (
-    <article className="flex flex-col bg-gray-50 border rounded-md">
+    <article className="flex flex-col gap-4 bg-gray-50 border rounded-md p-4">
       <CardPostHeader
         post={post}
         showActions={user?.id === userPost.id}
       />
 
+      <p className='whitespace-pre-line break-all'>{post?.description}</p>
       <img alt='Post image' className='max-h-[400px] object-contain' src={image} />
+
+      <hr />
 
       <CardPostFooter
         changeReaction={changeReactionPost}

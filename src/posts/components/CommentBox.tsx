@@ -35,7 +35,7 @@ export const CommentBox = ({ postId, comments }: Props) => {
   }
 
   return (
-    <section className='flex flex-col px-4 gap-5'>
+    <section className='flex flex-col gap-5'>
       <div className='flex gap-2 items-center'>
         <UserImage alt='User image' className='h-9 w-9' src={user?.image}/>
         <form className='flex-1' onSubmit={handleSubmitComment}>

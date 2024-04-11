@@ -3,7 +3,7 @@ import DataTable, { type TableColumn } from 'react-data-table-component'
 import { toast } from 'sonner'
 
 import { CardPostHeader, usePosts } from '../../posts'
-import { EyeIcon, Modal, TrashIcon } from '../../ui'
+import { CloseIcon, EyeIcon, Modal, TrashIcon } from '../../ui'
 import { type PostsResponse } from '../../types'
 import { useModal } from '../../ui/hooks/useModal'
 
@@ -87,13 +87,22 @@ export const AdminPostsPage = () => {
     <section className='w-full max-w-[1000px] mx-auto p-2'>
       {isOpenModal && currentPost && (
         <Modal
+          className='flex flex-col'
           onToggleModal={toggleModal}
         >
-          <div className='flex flex-col'>
+          <header className='flex p-4 sticky top-0 bg-gray-50 rounded-t-lg'>
             <CardPostHeader post={currentPost}/>
+            <button
+              className='flex flex-1 h-0 justify-end text-gray-500 hover:text-gray-700 hover:cursor-pointer'
+              onClick={toggleModal}
+              title='Close modal'
+              type='button'
+            >
+              <CloseIcon />
+            </button>
+          </header>
 
-            <img className='p-4 object-contain max-h-[300px]' src={currentPost.image} />
-          </div>
+          <img className='p-4 object-contain max-h-[300px]' src={currentPost.image} />
         </Modal>
       )}
 

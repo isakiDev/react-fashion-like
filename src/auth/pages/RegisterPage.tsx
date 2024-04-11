@@ -16,14 +16,16 @@ interface RegisterInputs {
 }
 
 export const RegisterPage = () => {
-  const { onRegisterUser } = useAuth()
   const navigate = useNavigate()
+  const { onRegisterUser } = useAuth()
 
   const handleSubmitRegisterUser = async ({ confirmPassword, ...data }: RegisterInputs) => {
-    // TODO: fix navigate
-    onRegisterUser(data)
-      .then(() => { navigate('/auth/login') })
-      .catch(error => toast.error((error.message as string)))
+    try {
+      await onRegisterUser(data)
+      navigate('/auth/login')
+    } catch (error) {
+      toast.error(error.message) // Muestra un mensaje de error en caso de fallo
+    }
   }
 
   return (

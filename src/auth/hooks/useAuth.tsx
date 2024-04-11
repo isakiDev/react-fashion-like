@@ -28,7 +28,7 @@ export const useAuth = () => {
     onChecking()
 
     try {
-      const { token, user } = await register(data)
+      const { token } = await register(data)
 
       window.localStorage.setItem('TOKEN', token)
 
