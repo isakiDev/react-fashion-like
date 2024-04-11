@@ -20,12 +20,9 @@ export const RegisterPage = () => {
   const { onRegisterUser } = useAuth()
 
   const handleSubmitRegisterUser = async ({ confirmPassword, ...data }: RegisterInputs) => {
-    try {
-      await onRegisterUser(data)
-      navigate('/auth/login')
-    } catch (error) {
-      toast.error(error.message) // Muestra un mensaje de error en caso de fallo
-    }
+    onRegisterUser(data)
+      .then(() => navigate('/auth/login'))
+      .catch(error => toast.error(error.message as string))
   }
 
   return (
