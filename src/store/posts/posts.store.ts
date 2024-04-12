@@ -27,7 +27,7 @@ export const createPostSlice: StateCreator<PostsSlice> = (set) => ({
   addPost: (post: PostsResponse) => {
     set(state => ({
       ...state,
-      posts: [...state.posts, { ...post }]
+      posts: [{ ...post }, ...state.posts]
     }))
   },
 
