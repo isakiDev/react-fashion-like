@@ -51,7 +51,7 @@ export const SettingsPage = () => {
           })}
         >
           {
-            () => (
+            ({ isSubmitting }) => (
               <Form>
                 <div className='flex flex-col gap-4'>
                   <InputFormik className='px-2 py-1 rounded-md bg-[#1d2432] border border-[#262e3a]' name='name' placeholder={user?.name} type='text' />
@@ -59,7 +59,11 @@ export const SettingsPage = () => {
 
                   <input className=' disabled:bg-transparent px-2 py-1 rounded-md bg-[#1d2432] border border-[#262e3a]' disabled value={user?.email}/>
                 </div>
-                <button className='px-4 py-1 my-8 rounded-md bg-slate-600 hover:bg-slate-500' type='submit'>Save</button>
+                <button
+                  className='disabled:bg-gray-300 px-4 py-1 my-8 rounded-md bg-slate-600 hover:bg-slate-500'
+                  disabled={isSubmitting}
+                  type='submit'
+                >Save</button>
               </Form>
             )
           }
@@ -75,7 +79,7 @@ export const SettingsPage = () => {
         })}
       >
         {
-          () => (
+          ({ isSubmitting }) => (
             <Form>
               <h1 className='pb-3 font-semibold'>Change password</h1>
               <div className='flex flex-col gap-4'>
@@ -84,7 +88,11 @@ export const SettingsPage = () => {
                 <InputFormik className='px-2 py-1 rounded-md bg-[#1d2432] border border-[#262e3a]' name='newPassword' placeholder='Enter new password' type='password' />
                 <ErrorMessageFormik component='span' name='newPassword' />
               </div>
-              <button className='px-4 py-1 my-8 rounded-md bg-slate-600 hover:bg-slate-500'>Save</button>
+              <button
+                className='px-4 py-1 my-8 rounded-md bg-slate-600 hover:bg-slate-500'
+                disabled={isSubmitting}
+                type='submit'
+              >Save</button>
             </Form>
           )
         }
