@@ -43,14 +43,14 @@ export const LoginPage = () => {
                   <h1 className="text-3xl font-bold text-indigo-600 text-shad">Login</h1>
                   <div className='flex flex-col gap-2'>
                     <InputFormik
-                      defaultValue='ledoh31398@eryod.com'
-                      name='email' placeholder='Enter email' type='text'
+                      name='email'
+                      placeholder='Enter email' type='text' value='ledoh31398@eryod.com'
                     />
                     <ErrorMessageFormik component='span' name='email' />
 
                     <InputFormik
-                      defaultValue='qqqqq'
-                      name='password' placeholder='Enter password' type='password'
+                      name='password'
+                      placeholder='Enter password' type='password' value='qqqqq'
                     />
                     <ErrorMessageFormik component='span' name='password' />
 
