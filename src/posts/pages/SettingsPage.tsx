@@ -1,4 +1,4 @@
-import { Formik, Form } from 'formik'
+import { Formik, Form, type FormikHelpers } from 'formik'
 import * as Yup from 'yup'
 import { toast } from 'sonner'
 
@@ -18,19 +18,23 @@ interface UpdateInputsPassword {
 export const SettingsPage = () => {
   const { user, onUpdateUser } = useAuth()
 
-  const handleSubmit = ({ name }: UpdateInputs) => {
-    toast.promise(onUpdateUser({ name }), {
+  const handleSubmit = (name: UpdateInputs, { setSubmitting }: FormikHelpers<UpdateInputs>) => {
+    toast.promise(onUpdateUser(name), {
       success: 'Name updated',
       loading: 'Updating name...',
-      error: (error) => error.message
+      error: (error) => error.message,
+      finally: () => setSubmitting(false)
     })
   }
 
-  const handleSubmitPassword = ({ currentPassword, newPassword }: UpdateInputsPassword) => {
+  const handleSubmitPassword = (values: UpdateInputsPassword, { setSubmitting }: FormikHelpers<UpdateInputsPassword>) => {
+    const { currentPassword, newPassword } = values
+
     toast.promise(onUpdateUser({ currentPassword, newPassword }), {
       success: 'Password updated',
       loading: 'Updating password...',
-      error: (error) => error.message
+      error: (error) => error.message,
+      finally: () => setSubmitting(false)
     })
   }
 
