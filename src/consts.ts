@@ -7,8 +7,8 @@ export enum AUTH_STATUS {
 }
 
 export const LOGIN_INITIAL_VALUES = {
-  email: '',
-  password: ''
+  email: 'ledoh31398@eryod.com',
+  password: 'qqqqq'
 }
 
 export const REGISTER_INITIAL_VALUES = {
