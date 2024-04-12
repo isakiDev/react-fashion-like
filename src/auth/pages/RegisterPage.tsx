@@ -20,9 +20,11 @@ export const RegisterPage = () => {
   const { onRegisterUser } = useAuth()
 
   const handleSubmitRegisterUser = async ({ confirmPassword, ...data }: RegisterInputs) => {
-    onRegisterUser(data)
-      .then(() => navigate('/auth/login'))
-      .catch(error => toast.error(error.message as string))
+    toast.promise(onRegisterUser(data), {
+      success: 'User created, please confirm your account with the email received',
+      error: (error) => error.message,
+      finally: () => navigate('/auth/login')
+    })
   }
 
   return (

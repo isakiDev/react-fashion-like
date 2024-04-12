@@ -27,8 +27,6 @@ export const PostCreatorBox = ({ user }: Props) => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    setIsSubmitted(true)
-
     const fields = new window.FormData(e.target as HTMLFormElement)
     const description = fields.get('description')?.toString()
     // const file = fields.get('file') as File
@@ -37,6 +35,10 @@ export const PostCreatorBox = ({ user }: Props) => {
       setIsSubmitted(false)
       return toast.error('Invalid description')
     }
+
+    if (!fileSelectRef.current?.value) return toast.error('File is required')
+
+    setIsSubmitted(true)
 
     toast.promise(onCreatePost(fields), {
       loading: 'Creating post...',

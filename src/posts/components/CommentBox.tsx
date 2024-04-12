@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 
 import { toast } from 'sonner'
 
@@ -16,6 +16,7 @@ interface Props {
 export const CommentBox = ({ postId, comments }: Props) => {
   const { user } = useAuth()
   const { onAddComment } = usePosts()
+  const [isSubmitted, setIsSubmitted] = useState(false)
 
   const commentRef = useRef<HTMLInputElement | null>(null)
 
@@ -25,12 +26,16 @@ export const CommentBox = ({ postId, comments }: Props) => {
 
     if (!commentValue || commentValue.trim().length <= 0) return toast.error('Invalid comment')
 
+    setIsSubmitted(true)
+
     toast.promise(onAddComment(postId, commentValue), {
       success: () => {
         if (commentRef.current) commentRef.current.value = ''
         return 'Comment added'
       },
-      error: (error) => error.message
+      loading: 'Loading...',
+      error: (error) => error.message,
+      finally: () => { setIsSubmitted(false) }
     })
   }
 
@@ -40,7 +45,8 @@ export const CommentBox = ({ postId, comments }: Props) => {
         <UserImage alt='User image' className='h-9 w-9' src={user?.image}/>
         <form className='flex-1' onSubmit={handleSubmitComment}>
           <input
-            className="px-3 py-1 border w-full rounded-2xl resize-none overflow-hidden"
+            className="disabled:bg-gray-300 px-3 py-1 border w-full rounded-2xl resize-none overflow-hidden"
+            disabled={isSubmitted}
             maxLength={25}
             name='comment'
             placeholder="Add new comment"

@@ -15,6 +15,7 @@ export const CardPostActions = ({ post }: Props) => {
 
   const [showMenuActions, setShowMenuActions] = useState(false)
   const [description, setDescription] = useState(post.description)
+  const [isSubmitted, setIsSubmitted] = useState(false)
 
   const { onUpdatePost } = usePosts()
   const { isOpenModal, toggleModal } = useModal()
@@ -26,13 +27,16 @@ export const CardPostActions = ({ post }: Props) => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
+    setIsSubmitted(true)
+
     toast.promise(onUpdatePost(post.id, description), {
       loading: 'Loading...',
       success: () => {
         closeActionsAndModal()
         return 'Updated post'
       },
-      error: (error) => error.message
+      error: (error) => error.message,
+      finally: () => { setIsSubmitted(false) }
     })
   }
 
@@ -96,13 +100,12 @@ export const CardPostActions = ({ post }: Props) => {
               value={description}
             />
 
-            {/* <div className='flex place-content-center'> */}
             <img alt="Post image" className='pt-4 size-1/2' src={image} />
-            {/* </div> */}
 
             <div className='flex justify-end pt-4'>
               <CustomButton
                 className='disabled:bg-gray-300 rounded-full font-semibold px-4 py-1'
+                disabled={isSubmitted}
               >Save</CustomButton>
             </div>
           </form>
