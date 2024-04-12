@@ -42,10 +42,16 @@ export const LoginPage = () => {
                 <Form className='flex flex-col gap-10 text-center md:border-2 md:rounded-xl p-7'>
                   <h1 className="text-3xl font-bold text-indigo-600 text-shad">Login</h1>
                   <div className='flex flex-col gap-2'>
-                    <InputFormik name='email' placeholder='Enter email' type='text' />
+                    <InputFormik
+                      defaultValue='ledoh31398@eryod.com'
+                      name='email' placeholder='Enter email' type='text'
+                    />
                     <ErrorMessageFormik component='span' name='email' />
 
-                    <InputFormik name='password' placeholder='Enter password' type='password' />
+                    <InputFormik
+                      defaultValue='qqqqq'
+                      name='password' placeholder='Enter password' type='password'
+                    />
                     <ErrorMessageFormik component='span' name='password' />
 
                   </div>
