@@ -1,13 +1,19 @@
-# Task
-- fix navigate
+# Stack
 
-Requisitos:
-- [x] Los usuarios deben poder loguearse con email y contraseña.
-- [x] El usuario debe poder ver todos los posteos en orden cronológico empezando desde el
-más reciente.
-- [x] En cada posteo se puede elegir “like” o “dislike”.
-- [x] Cada usuario puede elegir una sola opción por posteo. Puede cambiar de opinión luego
-de haber elegido una opción.
-- [x] Debe haber un usuario administrador para ingresar a un panel de control.
-- [ ] En el panel de control debo poder crear, editar y eliminar posteos.
-- [x] Debo poder ver el detalle de cada posteo con sus estadísticas.
+[![My Skills](https://skillicons.dev/icons?i=react,ts,zustand,tailwind)](https://skillicons.dev)
+
+# Run Project
+1. Clone the repository
+2. Install dependencies
+```
+pnpm i
+```
+3. Clone file ```.env.template``` and rename the copy to ```.env```
+4. Fill data into .env
+6. Run application
+```
+pnpm run dev
+```
+
+# 🔗 Links
+- [Code Backend](https://github.com/isakiDev/nest-fashion-like)
