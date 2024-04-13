@@ -16,7 +16,7 @@ export const PostsPage = () => {
   }, [])
 
   return (
-    <main className='p-4 w-full max-w-[500px] h-screen overflow-y-auto space-y-4'>
+    <main className='p-4 w-full max-w-[500px] h-[100vh] overflow-y-auto space-y-4'>
       {isLogged && <PostCreatorBox user={user} />}
 
       {!isLogged && (
