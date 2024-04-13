@@ -3,7 +3,7 @@ import type { PostsResponse, ErrorResponse, CommentResponse, TypeReaction, React
 const API_URL = import.meta.env.VITE_API_URL
 
 export const getAllPosts = async () => {
-  const resp = await fetch(`${API_URL}/post`, {
+  const resp = await fetch(`${API_URL}/post?limit=50`, {
     headers: { 'Content-Type': 'application/json' }
   })
 
