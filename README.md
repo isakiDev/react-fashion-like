@@ -1,6 +1,6 @@
 # Stack
 
-[![My Skills](https://skillicons.dev/icons?i=react,ts,zustand,tailwind)](https://skillicons.dev)
+[![My Skills](https://skillicons.dev/icons?i=react,ts,tailwind)](https://skillicons.dev)
 
 # Run Project
 1. Clone the repository
